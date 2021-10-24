@@ -1,3 +1,5 @@
+import Display.BatteryDisplay;
+import Display.SpeedDisplay;
 import Door.BusDoor;
 import Engine.BatteryManagement;
 import Engine.Engine;
@@ -25,6 +27,8 @@ public class Application {
         GasPedal gasPedal = new GasPedal();
         SteeringWheel steeringWheel = new SteeringWheel();
         ArrayList<SteeringAxis> steeringAxisList = new ArrayList<>();
+        SpeedDisplay speedDisplay = new SpeedDisplay();
+        BatteryDisplay batteryDisplay = new BatteryDisplay(engine.getBatteryManagement());
 
 
         steeringAxisList.add(new SteeringAxis());
@@ -87,6 +91,12 @@ public class Application {
         System.out.println("-----------------------------");
         System.out.println("-----------------------------");
 
-        System.out.println("Hello world");
+        speedDisplay.setSpeed(engine.getSpeed());
+        speedDisplay.showSpeed();
+
+        System.out.println("-----------------------------");
+        System.out.println("-----------------------------");
+
+        batteryDisplay.showPercentEnergy();
     }
 }
