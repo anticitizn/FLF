@@ -6,9 +6,13 @@ import Light.BlueLightSize;
 import Light.RoofLight;
 import Pedal.GasPedal;
 import Position.Position;
+import Steering.SteeringAxis;
+import Steering.SteeringWheel;
 import Tank.FoamPowderTank;
 import Tank.WaterTank;
 import Engine.Battery;
+
+import java.util.ArrayList;
 
 public class Application {
     public static void main(String[] args) {
@@ -19,7 +23,12 @@ public class Application {
         Engine engine = new Engine();
         FoamPowderTank foamPowderTank = new FoamPowderTank();
         GasPedal gasPedal = new GasPedal();
+        SteeringWheel steeringWheel = new SteeringWheel();
+        ArrayList<SteeringAxis> steeringAxisList = new ArrayList<>();
 
+
+        steeringAxisList.add(new SteeringAxis());
+        steeringAxisList.add(new SteeringAxis());
 
 
         System.out.println(blueLight.checkIsOn());
@@ -62,6 +71,18 @@ public class Application {
         engine.setSpeed(gasPedal.getSpeed());
         engine.getBatteryManagement().drain(engine.speedEnergyRatio(engine.getSpeed()));
         System.out.println(engine.getBatteryManagement().getCapacity());
+
+        System.out.println("-----------------------------");
+        System.out.println("-----------------------------");
+
+        steeringWheel.setRotation(5);
+
+        for (int i = 0; i < steeringAxisList.size(); i++) {
+            steeringAxisList.get(i).setRotation(steeringWheel.getRotation());
+            System.out.println(steeringAxisList.get(i).getRotation());
+        }
+
+        System.out.println(steeringWheel.getRotation());
 
         System.out.println("-----------------------------");
         System.out.println("-----------------------------");
