@@ -65,8 +65,6 @@ public class Application {
 
         System.out.println("-----------------------------");
         System.out.println("-----------------------------");
-        System.out.println("hello wordl");
-        System.out.println("bye world");
 
 
     }
