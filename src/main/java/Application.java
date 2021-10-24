@@ -87,6 +87,6 @@ public class Application {
         System.out.println("-----------------------------");
         System.out.println("-----------------------------");
 
-        System.out.println("test");
+        System.out.println("Hello world");
     }
 }
