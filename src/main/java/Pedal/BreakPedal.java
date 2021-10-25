@@ -9,6 +9,12 @@ public class BreakPedal extends Pedal{
 
     public int press()
     {
-        return speed=speed-4;
+        speed=speed-4;
+
+        if(speed<=0)
+        {
+            speed=0;
+        }
+        return speed;
     }
 }

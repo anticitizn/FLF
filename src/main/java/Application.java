@@ -1,3 +1,4 @@
+import Cabin.Cabin;
 import Display.BatteryDisplay;
 import Display.SpeedDisplay;
 import Door.BusDoor;
@@ -7,6 +8,8 @@ import Light.BlueLight;
 import Light.BlueLightSize;
 import Light.RoofLight;
 import Pedal.GasPedal;
+import Person.Driver;
+import Person.Operator;
 import Position.Position;
 import Steering.SteeringAxis;
 import Steering.SteeringWheel;
@@ -21,14 +24,26 @@ public class Application {
 
         BlueLight blueLight = new BlueLight(Position.FRONT_LEFT,3, BlueLightSize.MEDIUM);
         WaterTank waterTank = new WaterTank();
-        BusDoor busDoor = new BusDoor();
+
         Engine engine = new Engine();
         FoamPowderTank foamPowderTank = new FoamPowderTank();
-        GasPedal gasPedal = new GasPedal();
-        SteeringWheel steeringWheel = new SteeringWheel();
+
         ArrayList<SteeringAxis> steeringAxisList = new ArrayList<>();
-        SpeedDisplay speedDisplay = new SpeedDisplay();
-        BatteryDisplay batteryDisplay = new BatteryDisplay(engine.getBatteryManagement());
+
+
+        Cabin cabin = new Cabin();
+        Driver driver = new Driver(1,"Elon","Musk","28.6.1971");
+        Operator operator = new Operator(2,"Jeff","Bezos","12.1.1964");
+
+        cabin.getSeatsList().get(0).setDriver(driver);
+        cabin.getSeatsList().get(1).setOperator(operator);
+
+        cabin.getBatteryDisplay().setBatteryManagement(engine.getBatteryManagement());
+
+        driver.setSteeringWheel(cabin.getSteeringWheel());
+        driver.setGasPedal(cabin.getGasPedal());
+        driver.setBreakPedal(cabin.getBreakPedal());
+
 
 
         steeringAxisList.add(new SteeringAxis());
@@ -45,11 +60,6 @@ public class Application {
 
         System.out.println("-----------------------------");
 
-        System.out.println(busDoor.isOpen());
-        busDoor.open();
-        System.out.println(busDoor.isOpen());
-        System.out.println(busDoor.getInsideDoorButton().getDoorButtonPosition());
-        System.out.println(busDoor.getOutsideDoorButton().getDoorButtonPosition());
 
         System.out.println("-----------------------------");
 
@@ -69,34 +79,53 @@ public class Application {
         engine.getBatteryManagement().charge(100000);
         System.out.println(engine.getBatteryManagement().getCapacity());
 
-        for (int i = 0; i < 20; i++) {
-            gasPedal.press();
+
+        System.out.println("-----------------------------");
+        System.out.println("-----------------------------");
+        System.out.println("-----------------------------");
+        System.out.println("-----------------------------");
+
+        //Check Cabin-Doors
+        for (int i = 0; i < cabin.getBusDoorsList().size(); i++) {
+            cabin.getBusDoorsList().get(i).open();
+            System.out.println(cabin.getBusDoorsList().get(i).isOpen());
+            System.out.println(cabin.getBusDoorsList().get(i).getInsideDoorButton().getDoorButtonPosition());
+            System.out.println(cabin.getBusDoorsList().get(i).getOutsideDoorButton().getDoorButtonPosition());
         }
-        engine.setSpeed(gasPedal.getSpeed());
+
+        System.out.println("-----------------------------");
+        System.out.println("-----------------------------");
+
+        //Check if driver and operator are sitting on front_left and front_right seat
+        System.out.println( cabin.getSeatsList().get(0).getDriver());
+        System.out.println( cabin.getSeatsList().get(1).getOperator());
+
+        System.out.println("-----------------------------");
+        System.out.println("-----------------------------");
+
+        //Check if driver can press gaspedal and check correct enegery + speed amount
+        for (int i = 0; i < 20; i++) {
+           driver.getGasPedal().press();
+        }
+        engine.setSpeed(driver.getGasPedal().getSpeed());
         engine.getBatteryManagement().drain(engine.speedEnergyRatio(engine.getSpeed()));
         System.out.println(engine.getBatteryManagement().getCapacity());
 
+        cabin.getSpeedDisplay().setSpeed(engine.getSpeed());
+        cabin.getSpeedDisplay().showSpeed();
+
         System.out.println("-----------------------------");
         System.out.println("-----------------------------");
 
-        steeringWheel.setRotation(5);
+        //Check rotation of steering wheel is correctly transfered to the steering axis
+        driver.getSteeringWheel().setRotation(5);
 
         for (int i = 0; i < steeringAxisList.size(); i++) {
-            steeringAxisList.get(i).setRotation(steeringWheel.getRotation());
-            System.out.println(steeringAxisList.get(i).getRotation());
+            steeringAxisList.get(i).setRotation(driver.getSteeringWheel().getRotation());
+            System.out.println("Steering Axis rotation = " + steeringAxisList.get(i).getRotation());
         }
 
-        System.out.println(steeringWheel.getRotation());
+        System.out.println("SteeringWheel Rotation = "+driver.getSteeringWheel().getRotation());
 
-        System.out.println("-----------------------------");
-        System.out.println("-----------------------------");
-
-        speedDisplay.setSpeed(engine.getSpeed());
-        speedDisplay.showSpeed();
-
-        System.out.println("-----------------------------");
-        System.out.println("-----------------------------");
-
-        batteryDisplay.showPercentEnergy();
     }
 }

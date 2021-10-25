@@ -6,11 +6,9 @@ public class BatteryDisplay {
 
     private BatteryManagement batteryManagement;
 
-    public BatteryDisplay(BatteryManagement batteryManagement)
+    public BatteryDisplay()
     {
-        this.batteryManagement=batteryManagement;
 
-        setBatteryManagement(batteryManagement);
     }
 
     public BatteryManagement getBatteryManagement() {
