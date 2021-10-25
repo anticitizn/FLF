@@ -2,13 +2,10 @@ package Light;
 
 import Position.Position;
 
-public class TurnSignal {
-    private boolean isOn=false;
-    private Position position;
+public class TurnSignal extends Light {
 
-    public TurnSignal(Position position)
-    {
-        this.position=position;
+    public TurnSignal(Position position,int ledAmount){
+        super(position, ledAmount);
     }
 
     public void switchOn()
@@ -29,5 +26,10 @@ public class TurnSignal {
     public Position getPosition()
     {
         return position;
+    }
+
+    public int getLEDAmount()
+    {
+        return led.size();
     }
 }
