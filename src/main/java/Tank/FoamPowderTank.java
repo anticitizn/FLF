@@ -2,7 +2,7 @@ package Tank;
 
 import java.util.Arrays;
 
-public class FoamPowderTank implements  ITank{
+public class FoamPowderTank implements ITank {
 
     private final int[][][] capacity = new int[25][10][10];
     private int filled = 0;
