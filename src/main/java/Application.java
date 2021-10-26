@@ -4,6 +4,8 @@ import Display.SpeedDisplay;
 import Door.BusDoor;
 import Engine.BatteryManagement;
 import Engine.Engine;
+import Equipment.EquipmentType;
+import Equipment.FloorSprayNozzle;
 import Equipment.FrontLauncher;
 import Equipment.RoofExtinguishingArm;
 import FLF.FLF;
@@ -27,7 +29,7 @@ import java.util.ArrayList;
 public class Application {
     public static void main(String[] args) {
 
-        FLF flf = new FLF.Builder(new Cabin(), new Engine(), new WaterTank(), new FoamPowderTank()).build();
+        FLF flf = new FLF.Builder(new Engine(), new WaterTank(), new FoamPowderTank()).build();
 
 
         Driver driver = new Driver(1,"Elon","Musk","28.6.1971");
@@ -54,9 +56,7 @@ public class Application {
         System.out.println("-----------------------------");
         System.out.println("-----------------------------");
 
-        flf.getWaterTank().fill(12500);
         System.out.println(flf.getWaterTank().getCapacity());
-        flf.getWaterTank().drain(2000);
         System.out.println(flf.getWaterTank().getCapacity());
 
         System.out.println("-----------------------------");
@@ -121,22 +121,30 @@ public class Application {
         System.out.println("-----------------------------");
         System.out.println("-----------------------------");
 
-        WaterTank waterTank = new WaterTank();
-        FoamPowderTank foamTank = new FoamPowderTank();
-        MixingUnit mixingUnit = new MixingUnit(waterTank, foamTank);
-        FrontLauncher frontLauncher = new FrontLauncher(mixingUnit);
-        RoofExtinguishingArm roofExtinguishingArm = new RoofExtinguishingArm(mixingUnit);
-        Joystick frontJoystick = new Joystick(frontLauncher, mixingUnit);
-        Joystick roofJoystick = new Joystick(roofExtinguishingArm, mixingUnit);
+        System.out.println("-----------------------------");
+        System.out.println("-----------------------------");
 
-        System.out.println(waterTank.getCapacity());
-        System.out.println(foamTank.getCapacity());
+        flf.getFrontLauncher().activate();
+        System.out.println(flf.getWaterTank().getCapacity());
+        flf.getMixingUnit().setRatio(10, EquipmentType.FrontLauncher);
+        flf.getFrontLauncher().shoot();
+        System.out.println(flf.getWaterTank().getCapacity());
+        System.out.println(flf.getFoamPowderTank().getCapacity());
 
-        frontJoystick.pressLeftButton();
-        frontJoystick.pressRightButton();
-        frontJoystick.pressBackButton();
+        System.out.println("-----------------------------");
+        System.out.println("-----------------------------");
 
-        System.out.println(waterTank.getCapacity());
-        System.out.println(foamTank.getCapacity());
+        flf.getCabin().getFrontLauncherJoystick().pressLeftButton();
+        flf.getCabin().getFrontLauncherJoystick().pressRightButton();
+        flf.getCabin().getFrontLauncherJoystick().pressBackButton();
+
+        System.out.println(flf.getWaterTank().getCapacity());
+        System.out.println(flf.getFoamPowderTank().getCapacity());
+
+        System.out.println("-----------------------------");
+        System.out.println("-----------------------------");
+
+
+
     }
 }

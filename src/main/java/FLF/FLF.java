@@ -2,7 +2,11 @@ package FLF;
 
 import Cabin.Cabin;
 import Engine.Engine;
+import Equipment.FloorSprayNozzle;
+import Equipment.FrontLauncher;
+import Equipment.RoofExtinguishingArm;
 import Light.*;
+import MixingUnit.MixingUnit;
 import Position.Position;
 import Steering.BackAxis;
 import Steering.SteeringAxis;
@@ -26,6 +30,10 @@ public class FLF {
     private final ArrayList<WarningLight> warningLightList;
     private final ArrayList<BreakingLight> breakingLightList;
     private final ArrayList<TurnSignal> turnSignalList;
+    private final FrontLauncher frontLauncher;
+    private final FloorSprayNozzle floorSprayNozzle;
+    private final RoofExtinguishingArm roofExtinguishingArm;
+    private final MixingUnit mixingUnit;
 
     protected FLF (Builder builder)
     {
@@ -42,6 +50,10 @@ public class FLF {
         warningLightList= builder.warningLightList;
         breakingLightList= builder.breakingLightList;
         turnSignalList= builder.turnSignalList;
+        frontLauncher= builder.frontLauncher;
+        floorSprayNozzle= builder.floorSprayNozzle;
+        roofExtinguishingArm= builder.roofExtinguishingArm;
+        mixingUnit= builder.mixingUnit;
     }
 
     public Cabin getCabin() {
@@ -96,6 +108,22 @@ public class FLF {
         return turnSignalList;
     }
 
+    public FrontLauncher getFrontLauncher() {
+        return frontLauncher;
+    }
+
+    public FloorSprayNozzle getFloorSprayNozzle() {
+        return floorSprayNozzle;
+    }
+
+    public RoofExtinguishingArm getRoofExtinguishingArm() {
+        return roofExtinguishingArm;
+    }
+
+    public MixingUnit getMixingUnit() {
+        return mixingUnit;
+    }
+
     public static class Builder
     {
         private Cabin cabin;
@@ -111,12 +139,23 @@ public class FLF {
         private  ArrayList<WarningLight> warningLightList;
         private  ArrayList<BreakingLight> breakingLightList;
         private  ArrayList<TurnSignal> turnSignalList;
+        private final FrontLauncher frontLauncher;
+        private final FloorSprayNozzle floorSprayNozzle;
+        private final RoofExtinguishingArm roofExtinguishingArm;
+        private final MixingUnit mixingUnit;
 
-        public Builder(Cabin cabin, Engine engine, WaterTank waterTank, FoamPowderTank foamPowderTank){
-            this.cabin=cabin;
+        public Builder( Engine engine, WaterTank waterTank, FoamPowderTank foamPowderTank){
+
             this.engine=engine;
             this.waterTank=waterTank;
             this.foamPowderTank=foamPowderTank;
+            mixingUnit=new MixingUnit(waterTank, foamPowderTank);
+
+            frontLauncher=new FrontLauncher(mixingUnit);
+            floorSprayNozzle=new FloorSprayNozzle(waterTank);
+            roofExtinguishingArm=new RoofExtinguishingArm(mixingUnit);
+
+            cabin = new Cabin(frontLauncher,roofExtinguishingArm,mixingUnit);
 
             backAxesList = new ArrayList<>();
             for (int i = 0; i <= 1; i++) {

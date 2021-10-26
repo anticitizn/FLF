@@ -4,6 +4,10 @@ import ControlPanel.ControlPanel;
 import Display.BatteryDisplay;
 import Display.SpeedDisplay;
 import Door.BusDoor;
+import Equipment.FrontLauncher;
+import Equipment.RoofExtinguishingArm;
+import Joystick.Joystick;
+import MixingUnit.MixingUnit;
 import Pedal.BreakPedal;
 import Pedal.GasPedal;
 import Position.Position;
@@ -22,9 +26,11 @@ public class Cabin {
     private BreakPedal breakPedal;
     private SpeedDisplay speedDisplay;
     private BatteryDisplay batteryDisplay;
+    private Joystick frontLauncherJoystick;
+    private Joystick roofExtinguishingArmJoystick;
 
 
-    public Cabin(){
+    public Cabin(FrontLauncher frontLauncher, RoofExtinguishingArm roofExtinguishingArm, MixingUnit mixingUnit){
         busDoorsList = new ArrayList<>();
         seatsList = new ArrayList<>();
         controlPanel = new ControlPanel();
@@ -33,6 +39,9 @@ public class Cabin {
         breakPedal = new BreakPedal();
         speedDisplay = new SpeedDisplay();
         batteryDisplay = new BatteryDisplay();
+
+        frontLauncherJoystick = new Joystick(frontLauncher, mixingUnit);
+        roofExtinguishingArmJoystick = new Joystick(roofExtinguishingArm, mixingUnit);
 
         busDoorsList.add(new BusDoor());
         busDoorsList.add(new BusDoor());
@@ -108,5 +117,19 @@ public class Cabin {
         this.batteryDisplay = batteryDisplay;
     }
 
+    public Joystick getFrontLauncherJoystick() {
+        return frontLauncherJoystick;
+    }
 
+    public void setFrontLauncherJoystick(Joystick frontLauncherJoystick) {
+        this.frontLauncherJoystick = frontLauncherJoystick;
+    }
+
+    public Joystick getRoofExtinguishingArmJoystick() {
+        return roofExtinguishingArmJoystick;
+    }
+
+    public void setRoofExtinguishingArmJoystick(Joystick roofExtinguishingArmJoystick) {
+        this.roofExtinguishingArmJoystick = roofExtinguishingArmJoystick;
+    }
 }
