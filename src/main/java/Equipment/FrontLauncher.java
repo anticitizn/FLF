@@ -13,7 +13,7 @@ public class FrontLauncher extends Equipment {
 
     @Override
     public void shoot() {
-        mixingUnit.shoot(outputRate, equipmentType);
+        mixingUnit.drain(outputRate, equipmentType);
     }
 
     @Override

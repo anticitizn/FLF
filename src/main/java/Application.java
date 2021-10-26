@@ -4,10 +4,14 @@ import Display.SpeedDisplay;
 import Door.BusDoor;
 import Engine.BatteryManagement;
 import Engine.Engine;
+import Equipment.FrontLauncher;
+import Equipment.RoofExtinguishingArm;
 import FLF.FLF;
+import Joystick.Joystick;
 import Light.BlueLight;
 import Light.BlueLightSize;
 import Light.RoofLight;
+import MixingUnit.MixingUnit;
 import Pedal.GasPedal;
 import Person.Driver;
 import Person.Operator;
@@ -117,6 +121,22 @@ public class Application {
         System.out.println("-----------------------------");
         System.out.println("-----------------------------");
 
+        WaterTank waterTank = new WaterTank();
+        FoamPowderTank foamTank = new FoamPowderTank();
+        MixingUnit mixingUnit = new MixingUnit(waterTank, foamTank);
+        FrontLauncher frontLauncher = new FrontLauncher(mixingUnit);
+        RoofExtinguishingArm roofExtinguishingArm = new RoofExtinguishingArm(mixingUnit);
+        Joystick frontJoystick = new Joystick(frontLauncher, mixingUnit);
+        Joystick roofJoystick = new Joystick(roofExtinguishingArm, mixingUnit);
 
+        System.out.println(waterTank.getCapacity());
+        System.out.println(foamTank.getCapacity());
+
+        frontJoystick.pressLeftButton();
+        frontJoystick.pressRightButton();
+        frontJoystick.pressBackButton();
+
+        System.out.println(waterTank.getCapacity());
+        System.out.println(foamTank.getCapacity());
     }
 }
