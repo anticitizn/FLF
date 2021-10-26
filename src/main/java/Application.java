@@ -124,15 +124,7 @@ public class Application {
         System.out.println("-----------------------------");
         System.out.println("-----------------------------");
 
-        flf.getFrontLauncher().activate();
-        System.out.println(flf.getWaterTank().getCapacity());
-        flf.getMixingUnit().setRatio(10, EquipmentType.FrontLauncher);
-        flf.getFrontLauncher().shoot();
-        System.out.println(flf.getWaterTank().getCapacity());
-        System.out.println(flf.getFoamPowderTank().getCapacity());
-
-        System.out.println("-----------------------------");
-        System.out.println("-----------------------------");
+        flf.getCabin().getControlPanel().setRotaryButtonFrontLauncherState(2);
 
         flf.getCabin().getFrontLauncherJoystick().pressLeftButton();
         flf.getCabin().getFrontLauncherJoystick().pressRightButton();

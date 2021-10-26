@@ -155,7 +155,7 @@ public class FLF {
             floorSprayNozzle=new FloorSprayNozzle(waterTank);
             roofExtinguishingArm=new RoofExtinguishingArm(mixingUnit);
 
-            cabin = new Cabin(frontLauncher,roofExtinguishingArm,mixingUnit);
+
 
             backAxesList = new ArrayList<>();
             for (int i = 0; i <= 1; i++) {
@@ -168,6 +168,8 @@ public class FLF {
             }
 
             buildLights();
+
+            cabin = new Cabin(frontLauncher,roofExtinguishingArm,mixingUnit,engine, roofLightsList,sideLightList,headLightList,blueLightsList,warningLightList);
         }
 
         public void buildLights()

@@ -7,6 +7,7 @@ public class Engine {
     private ArrayList<ElectricMotor> electricMotorsList;
     private BatteryManagement batteryManagement = new BatteryManagement();
     private int speed = 0;
+    private boolean isOn = false;
 
     public Engine()
     {
@@ -36,5 +37,19 @@ public class Engine {
     {
        int speedEnergyRatio = speed*25;
        return speedEnergyRatio;
+    }
+
+    public void switchOn()
+    {
+        isOn=true;
+    }
+
+    public void switchOff()
+    {
+        isOn=false;
+    }
+
+    public boolean isOn() {
+        return isOn;
     }
 }

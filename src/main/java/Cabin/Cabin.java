@@ -4,9 +4,11 @@ import ControlPanel.ControlPanel;
 import Display.BatteryDisplay;
 import Display.SpeedDisplay;
 import Door.BusDoor;
+import Engine.Engine;
 import Equipment.FrontLauncher;
 import Equipment.RoofExtinguishingArm;
 import Joystick.Joystick;
+import Light.*;
 import MixingUnit.MixingUnit;
 import Pedal.BreakPedal;
 import Pedal.GasPedal;
@@ -30,10 +32,11 @@ public class Cabin {
     private Joystick roofExtinguishingArmJoystick;
 
 
-    public Cabin(FrontLauncher frontLauncher, RoofExtinguishingArm roofExtinguishingArm, MixingUnit mixingUnit){
+    public Cabin(FrontLauncher frontLauncher, RoofExtinguishingArm roofExtinguishingArm, MixingUnit mixingUnit, Engine engine, ArrayList<RoofLight> roofLightsList, ArrayList<SideLight> sideLightList, ArrayList<HeadLight> headLightList,
+                 ArrayList<BlueLight> blueLightsList, ArrayList<WarningLight> warningLightList){
         busDoorsList = new ArrayList<>();
         seatsList = new ArrayList<>();
-        controlPanel = new ControlPanel();
+        controlPanel = new ControlPanel(frontLauncher,roofExtinguishingArm, engine, roofLightsList, sideLightList, headLightList, blueLightsList, warningLightList);
         steeringWheel = new SteeringWheel();
         gasPedal = new GasPedal();
         breakPedal = new BreakPedal();
