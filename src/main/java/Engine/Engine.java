@@ -11,7 +11,7 @@ public class Engine {
 
     public Engine()
     {
-        electricMotorsList=new ArrayList<ElectricMotor>();
+        electricMotorsList= new ArrayList<>();
 
         electricMotorsList.add(new ElectricMotor());
         electricMotorsList.add(new ElectricMotor());
@@ -35,8 +35,7 @@ public class Engine {
 
     public int speedEnergyRatio(int speed)
     {
-       int speedEnergyRatio = speed*25;
-       return speedEnergyRatio;
+        return speed*25;
     }
 
     public void switchOn()

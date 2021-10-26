@@ -9,7 +9,7 @@ public class Utility {
         Calendar calendar = null;
 
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.mm.yyyy");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
             Date date = simpleDateFormat.parse(string);
             calendar = Calendar.getInstance();
             calendar.setTime(date);

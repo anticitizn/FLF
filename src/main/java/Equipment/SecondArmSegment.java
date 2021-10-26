@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class SecondArmSegment {
     public SecondArmSegment() {
-        smallSegments = new ArrayList<SmallArmSegment>();
+        smallSegments = new ArrayList<>();
         smallSegments.add(new SmallArmSegment(6));
         smallSegments.add(new SmallArmSegment(6));
         smallSegments.add(new SmallArmSegment(5));

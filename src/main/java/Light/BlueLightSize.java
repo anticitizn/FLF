@@ -1,5 +1,5 @@
 package Light;
 
 public enum BlueLightSize {
-    SMALL,MEDIUM,BIG;
+    SMALL,MEDIUM,BIG
 }

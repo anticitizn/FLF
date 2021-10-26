@@ -21,8 +21,8 @@ public class BatteryManagement {
 
     public void charge(int amount)
     {
-        for (int i = 0; i < batteryBox.size(); i++) {
-            batteryBox.get(i).charge(amount);
+        for (Battery box : batteryBox) {
+            box.charge(amount);
         }
     }
 
@@ -30,8 +30,8 @@ public class BatteryManagement {
     {
         int amountOut = amount / 4;
 
-        for (int i = 0; i < batteryBox.size(); i++) {
-            batteryBox.get(i).drain(amountOut);
+        for (Battery box : batteryBox) {
+            box.drain(amountOut);
         }
     }
 
@@ -39,8 +39,8 @@ public class BatteryManagement {
     {
         int capacityCombined=0;
 
-        for (int i = 0; i < batteryBox.size(); i++) {
-            capacityCombined=capacityCombined+batteryBox.get(i).getCapacity();
+        for (Battery box : batteryBox) {
+            capacityCombined = capacityCombined + box.getCapacity();
         }
 
         return capacityCombined;

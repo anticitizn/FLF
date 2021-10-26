@@ -1,30 +1,9 @@
-import Cabin.Cabin;
-import Display.BatteryDisplay;
-import Display.SpeedDisplay;
-import Door.BusDoor;
-import Engine.BatteryManagement;
 import Engine.Engine;
-import Equipment.EquipmentType;
-import Equipment.FloorSprayNozzle;
-import Equipment.FrontLauncher;
-import Equipment.RoofExtinguishingArm;
 import FLF.FLF;
-import Joystick.Joystick;
-import Light.BlueLight;
-import Light.BlueLightSize;
-import Light.RoofLight;
-import MixingUnit.MixingUnit;
-import Pedal.GasPedal;
 import Person.Driver;
 import Person.Operator;
-import Position.Position;
-import Steering.SteeringAxis;
-import Steering.SteeringWheel;
 import Tank.FoamPowderTank;
 import Tank.WaterTank;
-import Engine.Battery;
-
-import java.util.ArrayList;
 
 public class Application {
     public static void main(String[] args) {

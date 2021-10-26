@@ -1,7 +1,5 @@
 package Tank;
 
-import java.util.Arrays;
-
 public abstract class Tank implements ITank{
     private final int length;
     private final int width;

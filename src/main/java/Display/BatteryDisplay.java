@@ -23,8 +23,7 @@ public class BatteryDisplay {
     public double chargeToPercent()
     {
         double varPercentEnergy = batteryManagement.getCapacity();
-        double percentEnergy = (varPercentEnergy*100)/400000;
-        return percentEnergy;
+        return (varPercentEnergy*100)/400000;
     }
 
     public void showPercentEnergy()

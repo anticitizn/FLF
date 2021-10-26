@@ -16,7 +16,7 @@ public abstract class Light implements ILight {
         this.position=position;
         this.ledAmount=ledAmount;
 
-        led=new ArrayList<LED>();
+        led= new ArrayList<>();
 
         for (int i = 0; i < ledAmount; i++) {
             led.add(new LED());

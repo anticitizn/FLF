@@ -9,6 +9,6 @@ public class GasPedal extends Pedal{
 
     public int press()
     {
-        return speed=speed+4;
+        return speed+4;
     }
 }
