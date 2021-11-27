@@ -31,7 +31,7 @@ public class FLF {
     private final ArrayList<BreakingLight> breakingLightList;
     private final ArrayList<TurnSignal> turnSignalList;
     private final FrontLauncher frontLauncher;
-    private final FloorSprayNozzle floorSprayNozzle;
+    private final ArrayList<FloorSprayNozzle> floorSprayNozzleList;
     private final RoofExtinguishingArm roofExtinguishingArm;
     private final MixingUnit mixingUnit;
 
@@ -51,7 +51,7 @@ public class FLF {
         breakingLightList= builder.breakingLightList;
         turnSignalList= builder.turnSignalList;
         frontLauncher= builder.frontLauncher;
-        floorSprayNozzle= builder.floorSprayNozzle;
+        floorSprayNozzleList = builder.floorSprayNozzleList;
         roofExtinguishingArm= builder.roofExtinguishingArm;
         mixingUnit= builder.mixingUnit;
     }
@@ -112,8 +112,8 @@ public class FLF {
         return frontLauncher;
     }
 
-    public FloorSprayNozzle getFloorSprayNozzle() {
-        return floorSprayNozzle;
+    public ArrayList<FloorSprayNozzle> getFloorSprayNozzleList() {
+        return floorSprayNozzleList;
     }
 
     public RoofExtinguishingArm getRoofExtinguishingArm() {
@@ -140,7 +140,7 @@ public class FLF {
         private  ArrayList<BreakingLight> breakingLightList;
         private  ArrayList<TurnSignal> turnSignalList;
         private final FrontLauncher frontLauncher;
-        private final FloorSprayNozzle floorSprayNozzle;
+        private final ArrayList<FloorSprayNozzle> floorSprayNozzleList;
         private final RoofExtinguishingArm roofExtinguishingArm;
         private final MixingUnit mixingUnit;
 
@@ -152,7 +152,11 @@ public class FLF {
             mixingUnit=new MixingUnit(waterTank, foamPowderTank);
 
             frontLauncher=new FrontLauncher(mixingUnit);
-            floorSprayNozzle=new FloorSprayNozzle(waterTank);
+            floorSprayNozzleList = new ArrayList<>();
+            for (int i = 0; i <= 6; i++) {
+                floorSprayNozzleList.add(new FloorSprayNozzle(waterTank));
+            }
+
             roofExtinguishingArm=new RoofExtinguishingArm(mixingUnit);
 
 

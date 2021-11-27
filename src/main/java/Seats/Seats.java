@@ -9,6 +9,7 @@ public class Seats {
     private Position position;
     private Driver driver;
     private Operator operator;
+    private BreathingEquipment breathingEquipment;
 
     public Seats(Position position)
     {
@@ -35,4 +36,7 @@ public class Seats {
         this.operator = operator;
     }
 
+    public BreathingEquipment getBreathingEquipment() {
+        return breathingEquipment;
+    }
 }

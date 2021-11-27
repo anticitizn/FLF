@@ -21,6 +21,16 @@ public class SteeringWheel {
     }
 
     public void setRotation(int rotation) {
+
+        if(rotation>30)
+        {
+            rotation=30;
+        }
+        else if (rotation<-30)
+        {
+            rotation=-30;
+        }
+
         this.rotation = rotation;
     }
 }
