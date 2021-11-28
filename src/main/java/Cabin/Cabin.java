@@ -5,8 +5,10 @@ import Display.BatteryDisplay;
 import Display.SpeedDisplay;
 import Door.BusDoor;
 import Engine.Engine;
+import Equipment.FloorSprayNozzle;
 import Equipment.FrontLauncher;
 import Equipment.RoofExtinguishingArm;
+import FLF.FLF;
 import Joystick.Joystick;
 import Light.*;
 import MixingUnit.MixingUnit;
@@ -14,7 +16,11 @@ import Pedal.BreakPedal;
 import Pedal.GasPedal;
 import Position.Position;
 import Seats.Seats;
+import Steering.BackAxis;
+import Steering.SteeringAxis;
 import Steering.SteeringWheel;
+import Tank.FoamPowderTank;
+import Tank.WaterTank;
 
 import java.util.ArrayList;
 
@@ -32,28 +38,18 @@ public class Cabin {
     private Joystick roofExtinguishingArmJoystick;
 
 
-    public Cabin(FrontLauncher frontLauncher, RoofExtinguishingArm roofExtinguishingArm, MixingUnit mixingUnit, Engine engine, ArrayList<RoofLight> roofLightsList, ArrayList<SideLight> sideLightList, ArrayList<HeadLight> headLightList,
-                 ArrayList<BlueLight> blueLightsList, ArrayList<WarningLight> warningLightList){
-        busDoorsList = new ArrayList<>();
-        seatsList = new ArrayList<>();
-        controlPanel = new ControlPanel(frontLauncher,roofExtinguishingArm, engine, roofLightsList, sideLightList, headLightList, blueLightsList, warningLightList);
-        steeringWheel = new SteeringWheel();
-        gasPedal = new GasPedal();
-        breakPedal = new BreakPedal();
-        speedDisplay = new SpeedDisplay();
-        batteryDisplay = new BatteryDisplay();
-
-        frontLauncherJoystick = new Joystick(frontLauncher, mixingUnit);
-        roofExtinguishingArmJoystick = new Joystick(roofExtinguishingArm, mixingUnit);
-
-        busDoorsList.add(new BusDoor());
-        busDoorsList.add(new BusDoor());
-
-        seatsList.add(new Seats(Position.FRONT_LEFT));
-        seatsList.add(new Seats(Position.FRONT_RIGHT));
-        seatsList.add(new Seats(Position.BACK_LEFT));
-        seatsList.add(new Seats(Position.BACK_RIGHT));
-
+    public Cabin(Builder builder)
+    {
+        busDoorsList=builder.busDoorsList;
+        seatsList=builder.seatsList;
+        speedDisplay=builder.speedDisplay;
+        batteryDisplay=builder.batteryDisplay;
+        steeringWheel=builder.driverBuilder.steeringWheel;
+        gasPedal=builder.driverBuilder.gasPedal;
+        breakPedal=builder.driverBuilder.breakPedal;
+        frontLauncherJoystick=builder.driverBuilder.frontLauncherJoystick;
+        roofExtinguishingArmJoystick=builder.operatorBuilder.roofExtinguishingArmJoystick;
+        controlPanel=builder.operatorBuilder.controlPanel;
     }
 
     public ArrayList<BusDoor> getBusDoorsList() {
@@ -134,5 +130,72 @@ public class Cabin {
 
     public void setRoofExtinguishingArmJoystick(Joystick roofExtinguishingArmJoystick) {
         this.roofExtinguishingArmJoystick = roofExtinguishingArmJoystick;
+    }
+
+    public static class DriverBuilder
+    {
+        private SteeringWheel steeringWheel;
+        private GasPedal gasPedal;
+        private BreakPedal breakPedal;
+        private Joystick frontLauncherJoystick;
+
+        public DriverBuilder(SteeringWheel steeringWheel,GasPedal gasPedal,BreakPedal breakPedal,FrontLauncher frontLauncher,MixingUnit mixingUnit) {
+
+            this.steeringWheel=steeringWheel;
+            this.gasPedal=gasPedal;
+            this.breakPedal=breakPedal;
+
+            frontLauncherJoystick = new Joystick(frontLauncher, mixingUnit);
+
+        }
+    }
+
+    public static class OperatorBuilder
+    {
+        private ControlPanel controlPanel;
+        private Joystick roofExtinguishingArmJoystick;
+
+        public OperatorBuilder(FrontLauncher frontLauncher,RoofExtinguishingArm roofExtinguishingArm, MixingUnit mixingUnit, Engine engine, ArrayList<RoofLight> roofLightsList, ArrayList<SideLight> sideLightList, ArrayList<HeadLight> headLightList,
+                               ArrayList<BlueLight> blueLightsList, ArrayList<WarningLight> warningLightList) {
+
+            controlPanel = new ControlPanel(frontLauncher,roofExtinguishingArm, engine, roofLightsList, sideLightList, headLightList, blueLightsList, warningLightList);
+            roofExtinguishingArmJoystick = new Joystick(roofExtinguishingArm, mixingUnit);
+        }
+    }
+
+    public static class Builder
+    {
+        private ArrayList<BusDoor> busDoorsList;
+        private ArrayList<Seats> seatsList;
+        private SpeedDisplay speedDisplay;
+        private BatteryDisplay batteryDisplay;
+        private DriverBuilder driverBuilder;
+        private OperatorBuilder operatorBuilder;
+
+        public Builder(DriverBuilder driverBuilder, OperatorBuilder operatorBuilder)
+        {
+            busDoorsList = new ArrayList<>();
+            seatsList = new ArrayList<>();
+            speedDisplay = new SpeedDisplay();
+            batteryDisplay = new BatteryDisplay();
+
+            busDoorsList.add(new BusDoor());
+            busDoorsList.add(new BusDoor());
+
+            seatsList.add(new Seats(Position.FRONT_LEFT));
+            seatsList.add(new Seats(Position.FRONT_RIGHT));
+            seatsList.add(new Seats(Position.BACK_LEFT));
+            seatsList.add(new Seats(Position.BACK_RIGHT));
+
+            this.driverBuilder=driverBuilder;
+            this.operatorBuilder=operatorBuilder;
+
+
+        }
+
+        public Cabin build()
+        {
+            return new Cabin(this);
+        }
     }
 }

@@ -1,48 +1,59 @@
 package Engine;
 
-import java.util.ArrayList;
-
 public class BatteryManagement {
-    private final ArrayList<Battery> batteryBox;
+    private final Battery[][] batteryBox = new Battery[2][2];
 
     public BatteryManagement()
     {
-        batteryBox=new ArrayList<>();
 
-        batteryBox.add(new Battery());
-        batteryBox.add(new Battery());
-        batteryBox.add(new Battery());
-        batteryBox.add(new Battery());
+
+        batteryBox[0][0] = new Battery();
+        batteryBox[0][1] = new Battery();
+        batteryBox[1][0] = new Battery();
+        batteryBox[1][1] = new Battery();
     }
 
-    public ArrayList<Battery> getBatteryBox() {
+
+    public Battery[][] getBatteryBox() {
         return batteryBox;
     }
 
     public void charge(int amount)
     {
-        for (Battery box : batteryBox) {
-            box.charge(amount);
+        for (int i = 0; i < batteryBox.length; i++) {
+            for (int j = 0; j < batteryBox[i].length; j++) {
+                batteryBox[i][j].charge(amount);
+            }
         }
     }
+
+
 
     public void drain(int amount)
     {
         int amountOut = amount / 4;
 
-        for (Battery box : batteryBox) {
-            box.drain(amountOut);
+        for (int i = 0; i < batteryBox.length; i++) {
+            for (int j = 0; j < batteryBox[i].length; j++) {
+                batteryBox[i][j].drain(amountOut);
+            }
         }
     }
+
+
 
     public int getCapacity()
     {
         int capacityCombined=0;
 
-        for (Battery box : batteryBox) {
-            capacityCombined = capacityCombined + box.getCapacity();
+        for (int i = 0; i < batteryBox.length; i++) {
+            for (int j = 0; j < batteryBox[i].length; j++) {
+                capacityCombined = capacityCombined + batteryBox[i][j].getCapacity();
+            }
         }
 
         return capacityCombined;
     }
+
+
 }

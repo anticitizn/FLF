@@ -7,9 +7,12 @@ import Equipment.FrontLauncher;
 import Equipment.RoofExtinguishingArm;
 import Light.*;
 import MixingUnit.MixingUnit;
+import Pedal.BreakPedal;
+import Pedal.GasPedal;
 import Position.Position;
 import Steering.BackAxis;
 import Steering.SteeringAxis;
+import Steering.SteeringWheel;
 import Tank.FoamPowderTank;
 import Tank.WaterTank;
 
@@ -173,7 +176,9 @@ public class FLF {
 
             buildLights();
 
-            cabin = new Cabin(frontLauncher,roofExtinguishingArm,mixingUnit,engine, roofLightsList,sideLightList,headLightList,blueLightsList,warningLightList);
+            cabin = new Cabin.Builder(new Cabin.DriverBuilder(new SteeringWheel(), new GasPedal(),new BreakPedal(),frontLauncher, mixingUnit),
+                    new Cabin.OperatorBuilder(frontLauncher,roofExtinguishingArm, mixingUnit,engine, roofLightsList, sideLightList,  headLightList,
+                            blueLightsList,  warningLightList)).build();
         }
 
         public void buildLights()
