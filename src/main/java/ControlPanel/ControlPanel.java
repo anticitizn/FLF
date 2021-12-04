@@ -37,6 +37,14 @@ public class ControlPanel {
         this.warningLightList=warningLightList;
     }
 
+    public RotaryButtonFrontExtinguishingArm getRotaryButtonFrontExtinguishingArm() {
+        return rotaryButtonFrontExtinguishingArm;
+    }
+
+    public RotaryButtonFrontLauncher getRotaryButtonFrontLauncher() {
+        return rotaryButtonFrontLauncher;
+    }
+
     public void switchOnRoofLights()
     {
         for (RoofLight roofLight : roofLightsList) {

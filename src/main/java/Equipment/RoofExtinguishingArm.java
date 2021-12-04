@@ -13,6 +13,10 @@ public class RoofExtinguishingArm extends Equipment {
         this.equipmentType = EquipmentType.RoofExtinguishingArm;
     }
 
+    public FirstArmSegment getFirstArmSegment() {
+        return firstArmSegment;
+    }
+
     @Override
     public void shoot() {
         mixingUnit.drain(outputRate, equipmentType);

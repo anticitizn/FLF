@@ -5,12 +5,15 @@ public class BatteryManagement {
 
     public BatteryManagement()
     {
-
-
         batteryBox[0][0] = new Battery();
         batteryBox[0][1] = new Battery();
         batteryBox[1][0] = new Battery();
         batteryBox[1][1] = new Battery();
+
+        batteryBox[0][0].charge(100000);
+        batteryBox[0][1].charge(100000);
+        batteryBox[1][0].charge(100000);
+        batteryBox[1][1].charge(100000);
     }
 
 
