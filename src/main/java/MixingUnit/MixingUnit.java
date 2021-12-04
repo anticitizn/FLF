@@ -10,12 +10,34 @@ public class MixingUnit {
     private final WaterTank waterTank;
     private final FoamPowderTank foamPowderTank;
     private final HashMap<EquipmentType, Integer> ratios = new HashMap<>();
+    int ratioState = 0;
 
     public MixingUnit(WaterTank WaterTank, FoamPowderTank FoamPowderTank) {
         waterTank = WaterTank;
         foamPowderTank = FoamPowderTank;
         ratios.put(EquipmentType.FrontLauncher, 0);
         ratios.put(EquipmentType.RoofExtinguishingArm, 0);
+    }
+
+    public void switchRatio(EquipmentType equipmentType) {
+        switch (ratioState) {
+            case 0 -> {
+                setRatio(3, equipmentType);
+                ratioState = 1;
+            }
+            case 1 -> {
+                setRatio(5, equipmentType);
+                ratioState = 2;
+            }
+            case 2 -> {
+                setRatio(10, equipmentType);
+                ratioState = 3;
+            }
+            case 3 -> {
+                setRatio(0, equipmentType);
+                ratioState = 0;
+            }
+        }
     }
 
     public void setRatio(int ratio, EquipmentType equipmentType) {

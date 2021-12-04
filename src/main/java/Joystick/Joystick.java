@@ -27,25 +27,8 @@ public class Joystick implements IJoystick{
     public void pressRightButton() {
         if (!launcher.isActive()) {
             return;
-        }
-
-        switch (ratioState) {
-            case 0 -> {
-                mixingUnit.setRatio(3, launcher.getEquipmentType());
-                ratioState = 1;
-            }
-            case 1 -> {
-                mixingUnit.setRatio(5, launcher.getEquipmentType());
-                ratioState = 2;
-            }
-            case 2 -> {
-                mixingUnit.setRatio(10, launcher.getEquipmentType());
-                ratioState = 3;
-            }
-            case 3 -> {
-                mixingUnit.setRatio(0, launcher.getEquipmentType());
-                ratioState = 0;
-            }
+        } else {
+            mixingUnit.switchRatio(launcher.getEquipmentType());
         }
     }
 
