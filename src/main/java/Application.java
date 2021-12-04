@@ -6,6 +6,7 @@ import Tank.FoamPowderTank;
 import Tank.WaterTank;
 
 public class Application {
+
     public static void main(String[] args) {
 
         FLF flf = new FLF.Builder(new Engine(), new WaterTank(), new FoamPowderTank()).build();
@@ -22,6 +23,7 @@ public class Application {
         driver.setSteeringWheel(flf.getCabin().getSteeringWheel());
         driver.setGasPedal(flf.getCabin().getGasPedal());
         driver.setBreakPedal(flf.getCabin().getBreakPedal());
+        operator.setControlPanel((flf.getCabin().getControlPanel()));
 
         for (int i = 0; i < flf.getBlueLightsList().size(); i++) {
             System.out.println(flf.getBlueLightsList().get(i).checkIsOn());
