@@ -1,5 +1,7 @@
 package Person;
 
+import ID.IDCard;
+
 import java.util.Calendar;
 
 public abstract class Person {
@@ -8,12 +10,14 @@ public abstract class Person {
     protected final String firstName;
     protected  final String lastName;
     protected final Calendar dateOfBirth;
+    protected final IDCard idCard;
 
-    public Person(int id, final String firstName, final String lastName, final String dateOfBirthString ) {
+    public Person(int id, final String firstName, final String lastName, final String dateOfBirthString, final IDCard idCard ) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         dateOfBirth = Utility.convertStringToCalendarDate(dateOfBirthString);
+        this.idCard=idCard;
 
     }
 
@@ -37,6 +41,9 @@ public abstract class Person {
         return dateOfBirth;
     }
 
+    public IDCard getIdCard() {
+        return idCard;
+    }
 
     public boolean equals(Object object) {
         if (object == null) {
