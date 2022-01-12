@@ -1,6 +1,7 @@
 package ID;
 
 
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -13,67 +14,137 @@ import javax.crypto.SecretKey;
 
 public class RFIDChip {
 
-    /*       try
+    private int id;
+    private String firstName;
+    private String lastName;
+    private KeyGenerator keygenerator;
+    private SecretKey myDesKey;
+    private Cipher desCipher;
 
-    {
 
-        KeyGenerator keygenerator = KeyGenerator.getInstance("DES");
-        SecretKey myDesKey = keygenerator.generateKey();
 
-        Cipher desCipher;
+    public RFIDChip(int id, String firstName, String lastName) {
 
-        // Create the cipher
-        desCipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
 
-        // Initialize the cipher for encryption
-        desCipher.init(Cipher.ENCRYPT_MODE, myDesKey);
+    }
 
-        //sensitive information
-        byte[] text = "No body can see me".getBytes();
 
-        System.out.println("Text [Byte Format] : " + text);
-        System.out.println("Text : " + new String(text));
 
-        // Encrypt the text
-        byte[] textEncrypted = desCipher.doFinal(text);
 
-        System.out.println("Text Encryted : " + textEncrypted);
+    public byte[] encrypt() {
+        byte[] textEncrypted = new byte[0];
 
-        // Initialize the same cipher for decryption
-        desCipher.init(Cipher.DECRYPT_MODE, myDesKey);
 
-        // Decrypt the text
-        byte[] textDecrypted = desCipher.doFinal(textEncrypted);
+        try {
 
-        System.out.println("Text Decryted : " + new String(textDecrypted));
+            KeyGenerator keygenerator = KeyGenerator.getInstance("DES");
+            SecretKey myDesKey = keygenerator.generateKey();
 
-    }catch(
-    NoSuchAlgorithmException e)
+            Cipher desCipher;
 
-    {
-        e.printStackTrace();
-    }catch(
-    NoSuchPaddingException e)
+             //Create the cipher
+            desCipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
 
-    {
-        e.printStackTrace();
-    }catch(
-    InvalidKeyException e)
+             //Initialize the cipher for encryption
+            desCipher.init(Cipher.ENCRYPT_MODE, myDesKey);
 
-    {
-        e.printStackTrace();
-    }catch(
-    IllegalBlockSizeException e)
+            String nameString = firstName + " " + lastName;
 
-    {
-        e.printStackTrace();
-    }catch(
-    BadPaddingException e)
+            //sensitive information
+            byte[] text = ("FT-DUS-FLF-" + id + "-" + nameString + "-6072").getBytes();
 
-    {
-        e.printStackTrace();
-    }*/
+            System.out.println("Text [Byte Format] : " + text);
+            System.out.println("Text : " + new String(text));
+
+            // Encrypt the text
+            textEncrypted = desCipher.doFinal(text);
+
+            System.out.println("Text Encryted : " + textEncrypted);
+            
+            return textEncrypted;
+            
+        } catch (
+                InvalidKeyException | IllegalBlockSizeException | BadPaddingException | NoSuchAlgorithmException | NoSuchPaddingException e) {
+            e.printStackTrace();
+        }
+
+        return textEncrypted;
+    }
+
+    public void decrypt(byte[] textEncrypted) {
+        try {
+
+            KeyGenerator keygenerator = KeyGenerator.getInstance("DES");
+            SecretKey myDesKey = keygenerator.generateKey();
+
+            Cipher desCipher;
+
+            // Create the cipher
+            desCipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
+
+            // Initialize the same cipher for decryption
+            desCipher.init(Cipher.DECRYPT_MODE, myDesKey);
+
+            // Decrypt the text
+            byte[] textDecrypted = desCipher.doFinal(textEncrypted);
+
+            System.out.println("Text Decryted : " + new String(textDecrypted));
+
+
+        } catch (
+                NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void encryptDecrypt() {
+        try {
+
+            KeyGenerator keygenerator = KeyGenerator.getInstance("DES");
+            SecretKey myDesKey = keygenerator.generateKey();
+
+            Cipher desCipher;
+
+            // Create the cipher
+            desCipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
+
+            // Initialize the cipher for encryption
+            desCipher.init(Cipher.ENCRYPT_MODE, myDesKey);
+
+            String nameString = firstName + " " + lastName;
+
+            //sensitive information
+            byte[] text = ("FT-DUS-FLF-" + id + "-" + nameString + "-6072").getBytes();
+
+            System.out.println("Text [Byte Format] : " + text);
+            System.out.println("Text : " + new String(text));
+
+            // Encrypt the text
+            byte[] textEncrypted = desCipher.doFinal(text);
+
+            System.out.println("Text Encryted : " + textEncrypted);
+
+            // Initialize the same cipher for decryption
+            desCipher.init(Cipher.DECRYPT_MODE, myDesKey);
+
+            // Decrypt the text
+            byte[] textDecrypted = desCipher.doFinal(textEncrypted);
+
+            System.out.println("Text Decryted : " + new String(textDecrypted));
+
+
+        } catch (
+                NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
+
+
 
 
 

@@ -18,6 +18,11 @@ public class Application {
         flf.getCabin().getSeatsList().get(0).setDriver(driver);
         flf.getCabin().getSeatsList().get(1).setOperator(operator);
 
+
+        driver.getIdCard().getRfidChip().encrypt();
+
+        //driver.getIdCard().getRfidChip().decrypt(teste);
+
         flf.getCabin().getBatteryDisplay().setBatteryManagement(flf.getEngine().getBatteryManagement());
 
         driver.setSteeringWheel(flf.getCabin().getSteeringWheel());

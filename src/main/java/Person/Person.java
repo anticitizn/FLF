@@ -10,16 +10,21 @@ public abstract class Person {
     protected final String firstName;
     protected  final String lastName;
     protected final Calendar dateOfBirth;
-    protected final IDCard idCard;
+    protected IDCard idCard;
 
-    public Person(int id, final String firstName, final String lastName, final String dateOfBirthString, final IDCard idCard ) {
+
+    public Person(int id, final String firstName, final String lastName, final String dateOfBirthString) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         dateOfBirth = Utility.convertStringToCalendarDate(dateOfBirthString);
-        this.idCard=idCard;
-
+        idCard = new IDCard(id,firstName, lastName);
     }
+
+    public IDCard getIdCard() {
+        return idCard;
+    }
+
 
     public int getID() {
         return id;
@@ -39,10 +44,6 @@ public abstract class Person {
 
     public Calendar getDateOfBirth() {
         return dateOfBirth;
-    }
-
-    public IDCard getIdCard() {
-        return idCard;
     }
 
     public boolean equals(Object object) {
