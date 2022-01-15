@@ -5,11 +5,13 @@ public class BusDoor {
     private boolean isOpen = false;
     private final DoorButton insideDoorButton;
     private final DoorButton outsideDoorButton;
+    private final ReceiverModule receiverModule;
 
     public BusDoor()
     {
         insideDoorButton=new DoorButton(DoorButtonPosition.INSIDE);
         outsideDoorButton=new DoorButton(DoorButtonPosition.OUTSIDE);
+        receiverModule=new ReceiverModule();
     }
 
     public void open()

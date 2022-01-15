@@ -19,8 +19,8 @@ public class Application {
         flf.getCabin().getSeatsList().get(1).setOperator(operator);
 
 
-        driver.getIdCard().getRfidChip().encrypt();
-
+        byte[] encryption = driver.getIdCard().getRfidChip().encrypt();
+        System.out.println(encryption);
         //driver.getIdCard().getRfidChip().decrypt(teste);
 
         flf.getCabin().getBatteryDisplay().setBatteryManagement(flf.getEngine().getBatteryManagement());
