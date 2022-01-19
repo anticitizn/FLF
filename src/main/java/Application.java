@@ -88,7 +88,6 @@ public class Application {
         flf.getEngine().getBatteryManagement().drain(flf.getEngine().speedEnergyRatio(flf.getEngine().getSpeed()));
         System.out.println(flf.getEngine().getBatteryManagement().getCapacity());
 
-        flf.getCabin().getSpeedDisplay().setSpeed(flf.getEngine().getSpeed());
         flf.getCabin().getSpeedDisplay().showSpeed();
 
         System.out.println("-----------------------------");
