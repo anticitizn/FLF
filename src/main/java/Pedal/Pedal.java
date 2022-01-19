@@ -1,16 +1,12 @@
 package Pedal;
 
+import CentralUnit.CentralUnit;
+
 public  abstract class Pedal {
 
-    protected int speed=0;
+    protected CentralUnit centralUnit;
 
     public Pedal(){}
 
-    public int getSpeed() {
-        return speed;
-    }
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
+    public void press() {}
 }

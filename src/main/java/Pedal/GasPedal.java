@@ -7,8 +7,7 @@ public class GasPedal extends Pedal{
         super();
     }
 
-    public int press()
-    {
-        return speed+4;
+    public void press() {
+        centralUnit.gasPedalPressed();
     }
 }
