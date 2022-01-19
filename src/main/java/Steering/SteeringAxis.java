@@ -1,6 +1,6 @@
 package Steering;
 
-public class SteeringAxis extends Axes{
+public class SteeringAxis extends Axes {
 
     private int rotation = 0;
 

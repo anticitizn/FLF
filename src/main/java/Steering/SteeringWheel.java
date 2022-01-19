@@ -1,14 +1,15 @@
 package Steering;
 
+import CentralUnit.CentralUnit;
+
 import java.util.UUID;
 
 public class SteeringWheel {
+    private final String id;
+    private CentralUnit centralUnit;
 
-    private String id;
-    private int rotation;
-
-    public SteeringWheel(){
-
+    public SteeringWheel(CentralUnit centralUnit) {
+        this.centralUnit = centralUnit;
         id = UUID.randomUUID().toString();
     }
 
@@ -17,11 +18,10 @@ public class SteeringWheel {
     }
 
     public int getRotation() {
-        return rotation;
+        return centralUnit.getRotation();
     }
 
     public void setRotation(int rotation) {
-
         if(rotation>30)
         {
             rotation=30;
@@ -31,6 +31,6 @@ public class SteeringWheel {
             rotation=-30;
         }
 
-        this.rotation = rotation;
+        centralUnit.setRotation(rotation);
     }
 }

@@ -1,9 +1,16 @@
 package CentralUnit;
 
 import Engine.Engine;
+import Steering.SteeringAxis;
 
 public class CentralUnit {
-    private Engine engine;
+    private final Engine engine;
+    private final SteeringAxis steeringAxis;
+
+    public CentralUnit(Engine engine, SteeringAxis steeringAxis) {
+        this.engine = engine;
+        this.steeringAxis = steeringAxis;
+    }
 
     public int getSpeed() {
         return engine.getSpeed();
@@ -19,6 +26,14 @@ public class CentralUnit {
         } else {
             engine.setSpeed(0);
         }
-
     }
+
+    public void setRotation(int rotation) {
+        steeringAxis.setRotation(rotation);
+    }
+
+    public int getRotation() {
+        return steeringAxis.getRotation();
+    }
+
 }

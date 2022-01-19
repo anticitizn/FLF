@@ -1,17 +1,18 @@
 package Display;
 
+import CentralUnit.CentralUnit;
+
 public class SpeedDisplay {
 
-    private int speed=0;
+    private final CentralUnit centralUnit;
 
-    public SpeedDisplay(){}
-
-    public void setSpeed(int speed) {
-        this.speed = speed;
+    public SpeedDisplay(CentralUnit centralUnit)
+    {
+        this.centralUnit = centralUnit;
     }
 
     public int getSpeed() {
-        return speed;
+        return centralUnit.getSpeed();
     }
 
     public void showSpeed()

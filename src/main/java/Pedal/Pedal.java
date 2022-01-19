@@ -2,11 +2,14 @@ package Pedal;
 
 import CentralUnit.CentralUnit;
 
-public  abstract class Pedal {
+public abstract class Pedal {
 
-    protected CentralUnit centralUnit;
+    protected final CentralUnit centralUnit;
 
-    public Pedal(){}
+    public Pedal(CentralUnit centralUnit)
+    {
+        this.centralUnit = centralUnit;
+    }
 
     public void press() {}
 }
