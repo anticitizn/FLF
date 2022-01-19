@@ -12,7 +12,7 @@ import FLF.FLF;
 import Joystick.Joystick;
 import Light.*;
 import MixingUnit.MixingUnit;
-import Pedal.BreakPedal;
+import Pedal.BrakePedal;
 import Pedal.GasPedal;
 import Position.Position;
 import Seats.Seats;
@@ -31,7 +31,7 @@ public class Cabin {
     private ControlPanel controlPanel;
     private SteeringWheel steeringWheel;
     private GasPedal gasPedal;
-    private BreakPedal breakPedal;
+    private BrakePedal brakePedal;
     private SpeedDisplay speedDisplay;
     private BatteryDisplay batteryDisplay;
     private Joystick frontLauncherJoystick;
@@ -42,11 +42,11 @@ public class Cabin {
     {
         busDoorsList=builder.busDoorsList;
         seatsList=builder.seatsList;
-        speedDisplay=builder.speedDisplay;
+        speedDisplay=builder.driverBuilder.speedDisplay;
         batteryDisplay=builder.batteryDisplay;
         steeringWheel=builder.driverBuilder.steeringWheel;
         gasPedal=builder.driverBuilder.gasPedal;
-        breakPedal=builder.driverBuilder.breakPedal;
+        brakePedal=builder.driverBuilder.brakePedal;
         frontLauncherJoystick=builder.driverBuilder.frontLauncherJoystick;
         roofExtinguishingArmJoystick=builder.operatorBuilder.roofExtinguishingArmJoystick;
         controlPanel=builder.operatorBuilder.controlPanel;
@@ -92,12 +92,12 @@ public class Cabin {
         this.gasPedal = gasPedal;
     }
 
-    public BreakPedal getBreakPedal() {
-        return breakPedal;
+    public BrakePedal getBrakePedal() {
+        return brakePedal;
     }
 
-    public void setBreakPedal(BreakPedal breakPedal) {
-        this.breakPedal = breakPedal;
+    public void setBrakePedal(BrakePedal brakePedal) {
+        this.brakePedal = brakePedal;
     }
 
     public SpeedDisplay getSpeedDisplay() {
@@ -134,16 +134,17 @@ public class Cabin {
 
     public static class DriverBuilder
     {
-        private SteeringWheel steeringWheel;
-        private GasPedal gasPedal;
-        private BreakPedal breakPedal;
-        private Joystick frontLauncherJoystick;
+        private final SteeringWheel steeringWheel;
+        private final SpeedDisplay speedDisplay;
+        private final GasPedal gasPedal;
+        private final BrakePedal brakePedal;
+        private final Joystick frontLauncherJoystick;
 
-        public DriverBuilder(SteeringWheel steeringWheel,GasPedal gasPedal,BreakPedal breakPedal,FrontLauncher frontLauncher,MixingUnit mixingUnit) {
-
+        public DriverBuilder(SteeringWheel steeringWheel, SpeedDisplay speedDisplay, GasPedal gasPedal, BrakePedal brakePedal, FrontLauncher frontLauncher, MixingUnit mixingUnit) {
             this.steeringWheel=steeringWheel;
+            this.speedDisplay = speedDisplay;
             this.gasPedal=gasPedal;
-            this.breakPedal=breakPedal;
+            this.brakePedal=brakePedal;
 
             frontLauncherJoystick = new Joystick(frontLauncher, mixingUnit);
 
@@ -152,8 +153,8 @@ public class Cabin {
 
     public static class OperatorBuilder
     {
-        private ControlPanel controlPanel;
-        private Joystick roofExtinguishingArmJoystick;
+        private final ControlPanel controlPanel;
+        private final Joystick roofExtinguishingArmJoystick;
 
         public OperatorBuilder(FrontLauncher frontLauncher,RoofExtinguishingArm roofExtinguishingArm, MixingUnit mixingUnit, Engine engine, ArrayList<RoofLight> roofLightsList, ArrayList<SideLight> sideLightList, ArrayList<HeadLight> headLightList,
                                ArrayList<BlueLight> blueLightsList, ArrayList<WarningLight> warningLightList) {
@@ -165,18 +166,16 @@ public class Cabin {
 
     public static class Builder
     {
-        private ArrayList<BusDoor> busDoorsList;
-        private ArrayList<Seats> seatsList;
-        private SpeedDisplay speedDisplay;
-        private BatteryDisplay batteryDisplay;
-        private DriverBuilder driverBuilder;
-        private OperatorBuilder operatorBuilder;
+        private final ArrayList<BusDoor> busDoorsList;
+        private final ArrayList<Seats> seatsList;
+        private final BatteryDisplay batteryDisplay;
+        private final DriverBuilder driverBuilder;
+        private final OperatorBuilder operatorBuilder;
 
         public Builder(DriverBuilder driverBuilder, OperatorBuilder operatorBuilder)
         {
             busDoorsList = new ArrayList<>();
             seatsList = new ArrayList<>();
-            speedDisplay = new SpeedDisplay();
             batteryDisplay = new BatteryDisplay();
 
             busDoorsList.add(new BusDoor());

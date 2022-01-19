@@ -27,7 +27,7 @@ public class Application {
 
         driver.setSteeringWheel(flf.getCabin().getSteeringWheel());
         driver.setGasPedal(flf.getCabin().getGasPedal());
-        driver.setBreakPedal(flf.getCabin().getBreakPedal());
+        driver.setBreakPedal(flf.getCabin().getBrakePedal());
         operator.setControlPanel((flf.getCabin().getControlPanel()));
 
         for (int i = 0; i < flf.getBlueLightsList().size(); i++) {

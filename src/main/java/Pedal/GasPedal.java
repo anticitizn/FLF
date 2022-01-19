@@ -1,10 +1,12 @@
 package Pedal;
 
+import CentralUnit.CentralUnit;
+
 public class GasPedal extends Pedal{
 
-    public GasPedal()
+    public GasPedal(CentralUnit centralUnit)
     {
-        super();
+        super(centralUnit);
     }
 
     public void press() {

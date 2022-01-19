@@ -1,6 +1,8 @@
 package FLF;
 
 import Cabin.Cabin;
+import CentralUnit.CentralUnit;
+import Display.SpeedDisplay;
 import Engine.Engine;
 import Equipment.FloorSprayNozzle;
 import Equipment.FrontLauncher;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 public class FLF {
 
     private final Cabin cabin;
+    private final CentralUnit centralUnit;
     private final Engine engine;
     private final WaterTank waterTank;
     private final FoamPowderTank foamPowderTank;
@@ -41,6 +44,7 @@ public class FLF {
     protected FLF (Builder builder)
     {
         cabin=builder.cabin;
+        centralUnit=builder.centralUnit;
         engine=builder.engine;
         waterTank=builder.waterTank;
         foamPowderTank=builder.foamPowderTank;
@@ -130,18 +134,19 @@ public class FLF {
     public static class Builder
     {
         private Cabin cabin;
-        private  Engine engine;
-        private  WaterTank waterTank;
-        private  FoamPowderTank foamPowderTank;
-        private  ArrayList<BackAxis> backAxesList;
-        private  ArrayList<SteeringAxis> steeringAxesList;
-        private  ArrayList<RoofLight> roofLightsList;
-        private  ArrayList<SideLight> sideLightList;
-        private  ArrayList<HeadLight> headLightList;
-        private  ArrayList<BlueLight> blueLightsList;
-        private  ArrayList<WarningLight> warningLightList;
-        private  ArrayList<BreakingLight> breakingLightList;
-        private  ArrayList<TurnSignal> turnSignalList;
+        private CentralUnit centralUnit;
+        private Engine engine;
+        private WaterTank waterTank;
+        private FoamPowderTank foamPowderTank;
+        private ArrayList<BackAxis> backAxesList;
+        private ArrayList<SteeringAxis> steeringAxesList;
+        private ArrayList<RoofLight> roofLightsList;
+        private ArrayList<SideLight> sideLightList;
+        private ArrayList<HeadLight> headLightList;
+        private ArrayList<BlueLight> blueLightsList;
+        private ArrayList<WarningLight> warningLightList;
+        private ArrayList<BreakingLight> breakingLightList;
+        private ArrayList<TurnSignal> turnSignalList;
         private final FrontLauncher frontLauncher;
         private final ArrayList<FloorSprayNozzle> floorSprayNozzleList;
         private final RoofExtinguishingArm roofExtinguishingArm;
@@ -162,21 +167,21 @@ public class FLF {
 
             roofExtinguishingArm=new RoofExtinguishingArm(mixingUnit);
 
-
-
             backAxesList = new ArrayList<>();
             for (int i = 0; i <= 1; i++) {
                 backAxesList.add(new BackAxis());
             }
 
             steeringAxesList = new ArrayList<>();
-            for (int i = 0; i <= 2; i++) {
+            for (int i = 0; i <= 1; i++) {
                 steeringAxesList.add(new SteeringAxis());
             }
 
+            centralUnit = new CentralUnit(engine, steeringAxesList);
+
             buildLights();
 
-            cabin = new Cabin.Builder(new Cabin.DriverBuilder(new SteeringWheel(), new GasPedal(),new BrakePedal(),frontLauncher, mixingUnit),
+            cabin = new Cabin.Builder(new Cabin.DriverBuilder(new SteeringWheel(centralUnit), new SpeedDisplay(centralUnit), new GasPedal(centralUnit), new BrakePedal(centralUnit),frontLauncher, mixingUnit),
                     new Cabin.OperatorBuilder(frontLauncher,roofExtinguishingArm, mixingUnit,engine, roofLightsList, sideLightList,  headLightList,
                             blueLightsList,  warningLightList)).build();
         }

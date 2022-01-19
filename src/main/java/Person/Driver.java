@@ -1,7 +1,7 @@
 package Person;
 
 import ID.IDCard;
-import Pedal.BreakPedal;
+import Pedal.BrakePedal;
 import Pedal.GasPedal;
 import Steering.SteeringWheel;
 
@@ -9,15 +9,12 @@ public class Driver extends Person{
 
     private SteeringWheel steeringWheel;
     private GasPedal gasPedal;
-    private BreakPedal breakPedal;
-
-
+    private BrakePedal brakePedal;
 
     public Driver(int id, final String firstName, final String lastName, final String dateOfBirthString){
         super(id,firstName, lastName, dateOfBirthString);
 
     }
-
 
     public SteeringWheel getSteeringWheel() {
         return steeringWheel;
@@ -35,11 +32,11 @@ public class Driver extends Person{
         this.gasPedal = gasPedal;
     }
 
-    public BreakPedal getBreakPedal() {
-        return breakPedal;
+    public BrakePedal getBrakePedal() {
+        return brakePedal;
     }
 
-    public void setBreakPedal(BreakPedal breakPedal) {
-        this.breakPedal = breakPedal;
+    public void setBreakPedal(BrakePedal brakePedal) {
+        this.brakePedal = brakePedal;
     }
 }

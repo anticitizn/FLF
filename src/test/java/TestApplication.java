@@ -1,16 +1,11 @@
 import Engine.Engine;
 import FLF.FLF;
-import Light.*;
 import Person.Driver;
 import Person.Operator;
 import Tank.FoamPowderTank;
 import Tank.WaterTank;
 
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -36,7 +31,7 @@ public class TestApplication {
 
         driver.setSteeringWheel(flf.getCabin().getSteeringWheel());
         driver.setGasPedal(flf.getCabin().getGasPedal());
-        driver.setBreakPedal(flf.getCabin().getBreakPedal());
+        driver.setBreakPedal(flf.getCabin().getBrakePedal());
         operator.setControlPanel((flf.getCabin().getControlPanel()));
 
     }

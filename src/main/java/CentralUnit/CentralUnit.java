@@ -3,13 +3,15 @@ package CentralUnit;
 import Engine.Engine;
 import Steering.SteeringAxis;
 
+import java.util.ArrayList;
+
 public class CentralUnit {
     private final Engine engine;
-    private final SteeringAxis steeringAxis;
+    private final ArrayList<SteeringAxis> steeringAxes;
 
-    public CentralUnit(Engine engine, SteeringAxis steeringAxis) {
+    public CentralUnit(Engine engine, ArrayList<SteeringAxis> steeringAxes) {
         this.engine = engine;
-        this.steeringAxis = steeringAxis;
+        this.steeringAxes = steeringAxes;
     }
 
     public int getSpeed() {
@@ -29,11 +31,14 @@ public class CentralUnit {
     }
 
     public void setRotation(int rotation) {
-        steeringAxis.setRotation(rotation);
+        for (SteeringAxis steeringAxis : steeringAxes) {
+            steeringAxis.setRotation(rotation);
+        }
+
     }
 
     public int getRotation() {
-        return steeringAxis.getRotation();
+        return steeringAxes.get(0).getRotation();
     }
 
 }
