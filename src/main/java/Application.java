@@ -84,7 +84,7 @@ public class Application {
         for (int i = 0; i < 20; i++) {
            driver.getGasPedal().press();
         }
-        flf.getEngine().setSpeed(driver.getGasPedal().getSpeed());
+
         flf.getEngine().getBatteryManagement().drain(flf.getEngine().speedEnergyRatio(flf.getEngine().getSpeed()));
         System.out.println(flf.getEngine().getBatteryManagement().getCapacity());
 
