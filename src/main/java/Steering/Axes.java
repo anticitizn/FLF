@@ -6,13 +6,13 @@ import java.util.UUID;
 public abstract class Axes {
 
     protected ArrayList<Wheel> wheelList;
-    protected ArrayList<BrakeDics> brakeDicsList;
+    protected ArrayList<BrakeDiscs> brakeDiscsList;
     protected String id;
 
     public Axes()
     {
         wheelList = new ArrayList<>();
-        brakeDicsList = new ArrayList<>();
+        brakeDiscsList = new ArrayList<>();
 
         addWheels();
         addBrakeDics();
@@ -31,12 +31,12 @@ public abstract class Axes {
     public void addBrakeDics()
     {
         for (int i = 0; i <= 5; i++) {
-            brakeDicsList.add(new BrakeDics());
+            brakeDiscsList.add(new BrakeDiscs());
         }
     }
 
-    public ArrayList<BrakeDics> getBrakeDicsList() {
-        return brakeDicsList;
+    public ArrayList<BrakeDiscs> getBrakeDicsList() {
+        return brakeDiscsList;
     }
 
     public ArrayList<Wheel> getWheelList() {

@@ -2,11 +2,11 @@ package Steering;
 
 import java.util.UUID;
 
-public class BrakeDics {
+public class BrakeDiscs {
 
     private String id;
 
-    public BrakeDics(){
+    public BrakeDiscs(){
         id = UUID.randomUUID().toString();
     }
 
