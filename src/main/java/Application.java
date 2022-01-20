@@ -5,6 +5,9 @@ import Person.Operator;
 import Tank.FoamPowderTank;
 import Tank.WaterTank;
 
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+
 public class Application {
 
     public static void main(String[] args) {
@@ -19,9 +22,30 @@ public class Application {
         flf.getCabin().getSeatsList().get(1).setOperator(operator);
 
 
-        byte[] encryption = driver.getIdCard().getRfidChip().encrypt();
+        /*byte[] encryption = driver.getIdCard().getRfidChip().encrypt();
         System.out.println(encryption);
-        //driver.getIdCard().getRfidChip().decrypt(teste);
+        flf.getCabin().getBusDoorsList().get(0).getReceiverModule().insertIDCard(encryption);
+        System.out.println(flf.getCentralUnit().getEncryption());
+        //flf.getCentralUnit().decrypt(flf.getCentralUnit().getEncryption());*/
+
+        SecretKey secretKey = driver.getIdCard().getRfidChip().getMyDesKey();
+        Cipher cipher = driver.getIdCard().getRfidChip().getDesCipher();
+        byte[] encryption = driver.getIdCard().getRfidChip().encrypt(secretKey,cipher);
+        flf.getCabin().getBusDoorsList().get(0).getReceiverModule().insertIDCard(encryption);
+        flf.getCentralUnit().decrypt(flf.getCentralUnit().getEncryption(), secretKey, cipher);
+
+        //lock the door. You cant open it.
+        flf.getCentralUnit().checkDecryptedString();
+        flf.getCabin().getBusDoorsList().get(0).setIsLocked(flf.getCentralUnit().getIsLocked());
+        flf.getCabin().getBusDoorsList().get(0).open();
+
+        //unlock the door. Now it can be opened again
+        flf.getCentralUnit().checkDecryptedString();
+        flf.getCabin().getBusDoorsList().get(0).setIsLocked(flf.getCentralUnit().getIsLocked());
+        flf.getCabin().getBusDoorsList().get(0).open();
+        System.out.println("Door is open: "+flf.getCabin().getBusDoorsList().get(0).isOpen());
+
+
 
         flf.getCabin().getBatteryDisplay().setBatteryManagement(flf.getEngine().getBatteryManagement());
 

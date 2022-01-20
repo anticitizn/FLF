@@ -1,5 +1,6 @@
 package Cabin;
 
+import CentralUnit.CentralUnit;
 import ControlPanel.ControlPanel;
 import Display.BatteryDisplay;
 import Display.SpeedDisplay;
@@ -172,14 +173,14 @@ public class Cabin {
         private final DriverBuilder driverBuilder;
         private final OperatorBuilder operatorBuilder;
 
-        public Builder(DriverBuilder driverBuilder, OperatorBuilder operatorBuilder)
+        public Builder(DriverBuilder driverBuilder, OperatorBuilder operatorBuilder, CentralUnit centralUnit)
         {
             busDoorsList = new ArrayList<>();
             seatsList = new ArrayList<>();
             batteryDisplay = new BatteryDisplay();
 
-            busDoorsList.add(new BusDoor());
-            busDoorsList.add(new BusDoor());
+            busDoorsList.add(new BusDoor(centralUnit));
+            busDoorsList.add(new BusDoor(centralUnit));
 
             seatsList.add(new Seats(Position.FRONT_LEFT));
             seatsList.add(new Seats(Position.FRONT_RIGHT));

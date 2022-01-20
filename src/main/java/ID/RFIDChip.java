@@ -1,7 +1,7 @@
 package ID;
 
 
-import java.nio.charset.StandardCharsets;
+
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -17,7 +17,6 @@ public class RFIDChip {
     private int id;
     private String firstName;
     private String lastName;
-    private KeyGenerator keygenerator;
     private SecretKey myDesKey;
     private Cipher desCipher;
 
@@ -31,24 +30,40 @@ public class RFIDChip {
 
     }
 
-
-
-
-    public byte[] encrypt() {
-        byte[] textEncrypted = new byte[0];
-
-
+    public SecretKey getMyDesKey()
+    {
         try {
 
             KeyGenerator keygenerator = KeyGenerator.getInstance("DES");
             SecretKey myDesKey = keygenerator.generateKey();
+            this.myDesKey = myDesKey;
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return myDesKey;
+    }
 
+    public Cipher getDesCipher() {
+        try {
             Cipher desCipher;
 
-             //Create the cipher
+            //Create the cipher
             desCipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
+            this.desCipher=desCipher;
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return desCipher;
+    }
 
-             //Initialize the cipher for encryption
+    public byte[] encrypt(SecretKey secretKey, Cipher desCipher) {
+        byte[] textEncrypted = new byte[0];
+
+        try {
+
+            //Initialize the cipher for encryption
             desCipher.init(Cipher.ENCRYPT_MODE, myDesKey);
 
             String nameString = firstName + " " + lastName;
@@ -56,91 +71,24 @@ public class RFIDChip {
             //sensitive information
             byte[] text = ("FT-DUS-FLF-" + id + "-" + nameString + "-6072").getBytes();
 
-            System.out.println("Text [Byte Format] : " + text);
-            System.out.println("Text : " + new String(text));
+            //System.out.println("Text [Byte Format] : " + text);
+            //System.out.println("Text : " + new String(text));
 
             // Encrypt the text
             textEncrypted = desCipher.doFinal(text);
 
             System.out.println("Text Encryted : " + textEncrypted);
-            
+
             return textEncrypted;
-            
+
         } catch (
-                InvalidKeyException | IllegalBlockSizeException | BadPaddingException | NoSuchAlgorithmException | NoSuchPaddingException e) {
+                InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
             e.printStackTrace();
         }
 
         return textEncrypted;
     }
 
-    public void decrypt(byte[] textEncrypted) {
-        try {
-
-            KeyGenerator keygenerator = KeyGenerator.getInstance("DES");
-            SecretKey myDesKey = keygenerator.generateKey();
-
-            Cipher desCipher;
-
-            // Create the cipher
-            desCipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
-
-            // Initialize the same cipher for decryption
-            desCipher.init(Cipher.DECRYPT_MODE, myDesKey);
-
-            // Decrypt the text
-            byte[] textDecrypted = desCipher.doFinal(textEncrypted);
-
-            System.out.println("Text Decryted : " + new String(textDecrypted));
-
-
-        } catch (
-                NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void encryptDecrypt() {
-        try {
-
-            KeyGenerator keygenerator = KeyGenerator.getInstance("DES");
-            SecretKey myDesKey = keygenerator.generateKey();
-
-            Cipher desCipher;
-
-            // Create the cipher
-            desCipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
-
-            // Initialize the cipher for encryption
-            desCipher.init(Cipher.ENCRYPT_MODE, myDesKey);
-
-            String nameString = firstName + " " + lastName;
-
-            //sensitive information
-            byte[] text = ("FT-DUS-FLF-" + id + "-" + nameString + "-6072").getBytes();
-
-            System.out.println("Text [Byte Format] : " + text);
-            System.out.println("Text : " + new String(text));
-
-            // Encrypt the text
-            byte[] textEncrypted = desCipher.doFinal(text);
-
-            System.out.println("Text Encryted : " + textEncrypted);
-
-            // Initialize the same cipher for decryption
-            desCipher.init(Cipher.DECRYPT_MODE, myDesKey);
-
-            // Decrypt the text
-            byte[] textDecrypted = desCipher.doFinal(textEncrypted);
-
-            System.out.println("Text Decryted : " + new String(textDecrypted));
-
-
-        } catch (
-                NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | IllegalBlockSizeException | BadPaddingException e) {
-            e.printStackTrace();
-        }
-    }
 
 }
 

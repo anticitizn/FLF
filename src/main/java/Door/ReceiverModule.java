@@ -1,11 +1,17 @@
 package Door;
 
+import CentralUnit.CentralUnit;
+
 public class ReceiverModule {
 
-    public ReceiverModule(){}
+    private final CentralUnit centralUnit;
 
-    public byte[] insertIDCard(byte[] encrypted)
+    public ReceiverModule(CentralUnit centralUnit) {
+        this.centralUnit = centralUnit;
+    }
+
+    public void insertIDCard(byte[] encrypted)
     {
-        return encrypted;
+        centralUnit.setEncrypted(encrypted);
     }
 }

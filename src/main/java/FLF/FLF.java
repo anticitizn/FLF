@@ -131,6 +131,10 @@ public class FLF {
         return mixingUnit;
     }
 
+    public CentralUnit getCentralUnit() {
+        return centralUnit;
+    }
+
     public static class Builder
     {
         private Cabin cabin;
@@ -183,7 +187,7 @@ public class FLF {
 
             cabin = new Cabin.Builder(new Cabin.DriverBuilder(new SteeringWheel(centralUnit), new SpeedDisplay(centralUnit), new GasPedal(centralUnit), new BrakePedal(centralUnit),frontLauncher, mixingUnit),
                     new Cabin.OperatorBuilder(frontLauncher,roofExtinguishingArm, mixingUnit,engine, roofLightsList, sideLightList,  headLightList,
-                            blueLightsList,  warningLightList)).build();
+                            blueLightsList,  warningLightList), centralUnit).build();
         }
 
         public void buildLights()
