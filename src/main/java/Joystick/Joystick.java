@@ -3,17 +3,12 @@ package Joystick;
 import Equipment.Equipment;
 import MixingUnit.MixingUnit;
 
-public class Joystick implements IJoystick{
-    int ratioState = 0;
-    Equipment launcher;
-    MixingUnit mixingUnit;
+public class Joystick extends AbstractJoystick{
 
     public Joystick(Equipment Launcher, MixingUnit MixingUnit) {
-        launcher = Launcher;
-        mixingUnit = MixingUnit;
+        super(Launcher, MixingUnit);
     }
 
-    @Override
     public void pressLeftButton() {
         if (launcher.isActive()) {
             launcher.deactivate();
@@ -25,9 +20,7 @@ public class Joystick implements IJoystick{
 
     @Override
     public void pressRightButton() {
-        if (!launcher.isActive()) {
-            return;
-        } else {
+        if (launcher.isActive()) {
             mixingUnit.switchRatio(launcher.getEquipmentType());
         }
     }

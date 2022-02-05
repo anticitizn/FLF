@@ -33,7 +33,6 @@ public class TestApplication {
         driver.setGasPedal(flf.getCabin().getGasPedal());
         driver.setBreakPedal(flf.getCabin().getBrakePedal());
         operator.setControlPanel((flf.getCabin().getControlPanel()));
-
     }
 
     public void seatsOccupied(){

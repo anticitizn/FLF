@@ -6,22 +6,16 @@ import Display.BatteryDisplay;
 import Display.SpeedDisplay;
 import Door.BusDoor;
 import Engine.Engine;
-import Equipment.FloorSprayNozzle;
 import Equipment.FrontLauncher;
 import Equipment.RoofExtinguishingArm;
-import FLF.FLF;
-import Joystick.Joystick;
+import Joystick.AbstractJoystick;
 import Light.*;
 import MixingUnit.MixingUnit;
 import Pedal.BrakePedal;
 import Pedal.GasPedal;
 import Position.Position;
 import Seats.Seats;
-import Steering.BackAxis;
-import Steering.SteeringAxis;
 import Steering.SteeringWheel;
-import Tank.FoamPowderTank;
-import Tank.WaterTank;
 
 import java.util.ArrayList;
 
@@ -35,8 +29,8 @@ public class Cabin {
     private BrakePedal brakePedal;
     private SpeedDisplay speedDisplay;
     private BatteryDisplay batteryDisplay;
-    private Joystick frontLauncherJoystick;
-    private Joystick roofExtinguishingArmJoystick;
+    private AbstractJoystick frontLauncherJoystick;
+    private AbstractJoystick roofExtinguishingArmJoystick;
 
 
     public Cabin(Builder builder)
@@ -117,19 +111,19 @@ public class Cabin {
         this.batteryDisplay = batteryDisplay;
     }
 
-    public Joystick getFrontLauncherJoystick() {
+    public AbstractJoystick getFrontLauncherJoystick() {
         return frontLauncherJoystick;
     }
 
-    public void setFrontLauncherJoystick(Joystick frontLauncherJoystick) {
+    public void setFrontLauncherJoystick(AbstractJoystick frontLauncherJoystick) {
         this.frontLauncherJoystick = frontLauncherJoystick;
     }
 
-    public Joystick getRoofExtinguishingArmJoystick() {
+    public AbstractJoystick getRoofExtinguishingArmJoystick() {
         return roofExtinguishingArmJoystick;
     }
 
-    public void setRoofExtinguishingArmJoystick(Joystick roofExtinguishingArmJoystick) {
+    public void setRoofExtinguishingArmJoystick(AbstractJoystick roofExtinguishingArmJoystick) {
         this.roofExtinguishingArmJoystick = roofExtinguishingArmJoystick;
     }
 
@@ -139,29 +133,27 @@ public class Cabin {
         private final SpeedDisplay speedDisplay;
         private final GasPedal gasPedal;
         private final BrakePedal brakePedal;
-        private final Joystick frontLauncherJoystick;
+        private final AbstractJoystick frontLauncherJoystick;
 
-        public DriverBuilder(SteeringWheel steeringWheel, SpeedDisplay speedDisplay, GasPedal gasPedal, BrakePedal brakePedal, FrontLauncher frontLauncher, MixingUnit mixingUnit) {
+        public DriverBuilder(AbstractJoystick joystick, SteeringWheel steeringWheel, SpeedDisplay speedDisplay, GasPedal gasPedal, BrakePedal brakePedal, FrontLauncher frontLauncher, MixingUnit mixingUnit) {
+            frontLauncherJoystick = joystick;
             this.steeringWheel=steeringWheel;
             this.speedDisplay = speedDisplay;
             this.gasPedal=gasPedal;
             this.brakePedal=brakePedal;
-
-            frontLauncherJoystick = new Joystick(frontLauncher, mixingUnit);
-
         }
     }
 
     public static class OperatorBuilder
     {
         private final ControlPanel controlPanel;
-        private final Joystick roofExtinguishingArmJoystick;
+        private final AbstractJoystick roofExtinguishingArmJoystick;
 
-        public OperatorBuilder(FrontLauncher frontLauncher,RoofExtinguishingArm roofExtinguishingArm, MixingUnit mixingUnit, Engine engine, ArrayList<RoofLight> roofLightsList, ArrayList<SideLight> sideLightList, ArrayList<HeadLight> headLightList,
+        public OperatorBuilder(AbstractJoystick joystick, FrontLauncher frontLauncher, RoofExtinguishingArm roofExtinguishingArm, MixingUnit mixingUnit,
+                               Engine engine, ArrayList<RoofLight> roofLightsList, ArrayList<SideLight> sideLightList, ArrayList<HeadLight> headLightList,
                                ArrayList<BlueLight> blueLightsList, ArrayList<WarningLight> warningLightList) {
-
             controlPanel = new ControlPanel(frontLauncher,roofExtinguishingArm, engine, roofLightsList, sideLightList, headLightList, blueLightsList, warningLightList);
-            roofExtinguishingArmJoystick = new Joystick(roofExtinguishingArm, mixingUnit);
+            roofExtinguishingArmJoystick = joystick;
         }
     }
 
@@ -189,8 +181,6 @@ public class Cabin {
 
             this.driverBuilder=driverBuilder;
             this.operatorBuilder=operatorBuilder;
-
-
         }
 
         public Cabin build()

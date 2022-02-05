@@ -17,6 +17,7 @@ import Steering.SteeringAxis;
 import Steering.SteeringWheel;
 import Tank.FoamPowderTank;
 import Tank.WaterTank;
+import Joystick.Joystick;
 
 import java.util.ArrayList;
 
@@ -185,9 +186,11 @@ public class FLF {
 
             buildLights();
 
-            cabin = new Cabin.Builder(new Cabin.DriverBuilder(new SteeringWheel(centralUnit), new SpeedDisplay(centralUnit), new GasPedal(centralUnit), new BrakePedal(centralUnit),frontLauncher, mixingUnit),
-                    new Cabin.OperatorBuilder(frontLauncher,roofExtinguishingArm, mixingUnit,engine, roofLightsList, sideLightList,  headLightList,
-                            blueLightsList,  warningLightList), centralUnit).build();
+            cabin = new Cabin.Builder(
+                    new Cabin.DriverBuilder(new Joystick(frontLauncher, mixingUnit), new SteeringWheel(centralUnit), new SpeedDisplay(centralUnit), new GasPedal(centralUnit), new BrakePedal(centralUnit),frontLauncher, mixingUnit),
+                    new Cabin.OperatorBuilder(new Joystick(roofExtinguishingArm, mixingUnit), frontLauncher,roofExtinguishingArm, mixingUnit,engine, roofLightsList, sideLightList,  headLightList,
+                            blueLightsList,  warningLightList),
+                    centralUnit).build();
         }
 
         public void buildLights()
