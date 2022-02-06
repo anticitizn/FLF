@@ -16,7 +16,6 @@ public class BatteryManagement {
         batteryBox[1][1].charge(100000);
     }
 
-
     public Battery[][] getBatteryBox() {
         return batteryBox;
     }
@@ -30,8 +29,6 @@ public class BatteryManagement {
         }
     }
 
-
-
     public void drain(int amount)
     {
         int amountOut = amount / 4;
@@ -42,8 +39,6 @@ public class BatteryManagement {
             }
         }
     }
-
-
 
     public int getCapacity()
     {

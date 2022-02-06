@@ -21,13 +21,6 @@ public class Application {
         flf.getCabin().getSeatsList().get(0).setDriver(driver);
         flf.getCabin().getSeatsList().get(1).setOperator(operator);
 
-
-        /*byte[] encryption = driver.getIdCard().getRfidChip().encrypt();
-        System.out.println(encryption);
-        flf.getCabin().getBusDoorsList().get(0).getReceiverModule().insertIDCard(encryption);
-        System.out.println(flf.getCentralUnit().getEncryption());
-        //flf.getCentralUnit().decrypt(flf.getCentralUnit().getEncryption());*/
-
         SecretKey secretKey = driver.getIdCard().getRfidChip().getMyDesKey();
         Cipher cipher = driver.getIdCard().getRfidChip().getDesCipher();
         byte[] encryption = driver.getIdCard().getRfidChip().encrypt(secretKey,cipher);
@@ -44,8 +37,6 @@ public class Application {
         flf.getCabin().getBusDoorsList().get(0).setIsLocked(flf.getCentralUnit().getIsLocked());
         flf.getCabin().getBusDoorsList().get(0).open();
         System.out.println("Door is open: "+flf.getCabin().getBusDoorsList().get(0).isOpen());
-
-
 
         flf.getCabin().getBatteryDisplay().setBatteryManagement(flf.getEngine().getBatteryManagement());
 
@@ -104,12 +95,12 @@ public class Application {
         System.out.println("-----------------------------");
         System.out.println("-----------------------------");
 
-        //Check if driver can press gaspedal and check correct enegery + speed amount
+        //Check if driver can press GasPedal and check correct energy + speed amount
         for (int i = 0; i < 20; i++) {
            driver.getGasPedal().press();
         }
 
-        flf.getEngine().getBatteryManagement().drain(flf.getEngine().speedEnergyRatio(flf.getEngine().getSpeed()));
+        flf.travel();
         System.out.println(flf.getEngine().getBatteryManagement().getCapacity());
 
         flf.getCabin().getSpeedDisplay().showSpeed();
@@ -117,7 +108,7 @@ public class Application {
         System.out.println("-----------------------------");
         System.out.println("-----------------------------");
 
-        //Check rotation of steering wheel is correctly transfered to the steering axis
+        //Check rotation of steering wheel is correctly transferred to the steering axis
         driver.getSteeringWheel().setRotation(5);
 
         for (int i = 0; i < flf.getSteeringAxesList().size(); i++) {

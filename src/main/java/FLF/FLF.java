@@ -136,6 +136,10 @@ public class FLF {
         return centralUnit;
     }
 
+    public void travel() {
+        this.getEngine().getBatteryManagement().drain(this.getEngine().getSpeedEnergyRatio());
+    }
+
     public static class Builder
     {
         private Cabin cabin;
@@ -242,10 +246,9 @@ public class FLF {
             }
         }
 
-
-
         public FLF build() {
             return new FLF(this);
         }
+
     }
 }

@@ -33,7 +33,7 @@ public class Engine {
         this.speed = speed;
     }
 
-    public int speedEnergyRatio(int speed)
+    public int getSpeedEnergyRatio()
     {
         return speed*25;
     }
