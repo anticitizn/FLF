@@ -4,7 +4,7 @@ import Position.Position;
 
 public class BlueLight extends Light {
 
-    private BlueLightSize size;
+    private final BlueLightSize size;
 
     public BlueLight(Position position, int ledAmount, BlueLightSize size){
         super(position, ledAmount);

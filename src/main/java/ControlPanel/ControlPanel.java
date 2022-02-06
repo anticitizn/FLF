@@ -12,14 +12,14 @@ import java.util.ArrayList;
 
 public class ControlPanel {
 
-    private RotaryButtonFrontExtinguishingArm rotaryButtonFrontExtinguishingArm;
-    private RotaryButtonFrontLauncher rotaryButtonFrontLauncher;
-    private Engine engine;
-    private ArrayList<RoofLight> roofLightsList;
-    private  ArrayList<SideLight> sideLightList;
-    private  ArrayList<HeadLight> headLightList;
-    private  ArrayList<BlueLight> blueLightsList;
-    private  ArrayList<WarningLight> warningLightList;
+    private final RotaryButtonFrontExtinguishingArm rotaryButtonFrontExtinguishingArm;
+    private final RotaryButtonFrontLauncher rotaryButtonFrontLauncher;
+    private final Engine engine;
+    private final ArrayList<RoofLight> roofLightsList;
+    private final ArrayList<SideLight> sideLightList;
+    private final ArrayList<HeadLight> headLightList;
+    private final ArrayList<BlueLight> blueLightsList;
+    private final ArrayList<WarningLight> warningLightList;
 
     public ControlPanel(FrontLauncher frontLauncher, RoofExtinguishingArm roofExtinguishingArm, Engine engine,
                         ArrayList<RoofLight> roofLightsList, ArrayList<SideLight> sideLightList, ArrayList<HeadLight> headLightList,

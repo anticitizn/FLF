@@ -2,6 +2,7 @@ package Door;
 
 import CentralUnit.CentralUnit;
 
+@SuppressWarnings({"ALL", "ClassCanBeRecord"})
 public class ReceiverModule {
 
     private final CentralUnit centralUnit;

@@ -2,6 +2,7 @@ package Display;
 
 import CentralUnit.CentralUnit;
 
+@SuppressWarnings({"ALL", "ClassCanBeRecord"})
 public class SpeedDisplay {
 
     private final CentralUnit centralUnit;

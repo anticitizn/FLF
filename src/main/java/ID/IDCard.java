@@ -2,7 +2,7 @@ package ID;
 
 public class IDCard {
 
-    private RFIDChip rfidChip;
+    private final RFIDChip rfidChip;
 
     public IDCard(int id,String firstName, String lastName)
     {

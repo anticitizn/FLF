@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class SteeringWheel {
     private final String id;
-    private CentralUnit centralUnit;
+    private final CentralUnit centralUnit;
 
     public SteeringWheel(CentralUnit centralUnit) {
         this.centralUnit = centralUnit;

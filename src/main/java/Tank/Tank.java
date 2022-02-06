@@ -1,5 +1,6 @@
 package Tank;
 
+@SuppressWarnings("ALL")
 public abstract class Tank implements ITank{
     private final int length;
     private final int width;

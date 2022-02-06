@@ -10,7 +10,7 @@ public abstract class Person {
     protected final String firstName;
     protected  final String lastName;
     protected final Calendar dateOfBirth;
-    protected IDCard idCard;
+    protected final IDCard idCard;
 
 
     public Person(int id, final String firstName, final String lastName, final String dateOfBirthString) {
@@ -55,7 +55,7 @@ public abstract class Person {
             return true;
         }
 
-        if (!(object instanceof Person)) {
+        if (!(object instanceof final Person employee)) {
             return false;
         }
 
@@ -63,7 +63,6 @@ public abstract class Person {
             return false;
         }
 
-        final Person employee = (Person) object;
         return id == employee.getID();
     }
 }

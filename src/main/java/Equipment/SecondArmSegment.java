@@ -2,6 +2,7 @@ package Equipment;
 
 import java.util.ArrayList;
 
+@SuppressWarnings("ALL")
 public class SecondArmSegment {
     public SecondArmSegment() {
         smallSegments = new ArrayList<>();

@@ -1,5 +1,6 @@
 package Engine;
 
+@SuppressWarnings("ALL")
 public class BatteryManagement {
     private final Battery[][] batteryBox = new Battery[2][2];
 

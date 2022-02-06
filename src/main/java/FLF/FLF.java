@@ -142,13 +142,13 @@ public class FLF {
 
     public static class Builder
     {
-        private Cabin cabin;
-        private CentralUnit centralUnit;
-        private Engine engine;
-        private WaterTank waterTank;
-        private FoamPowderTank foamPowderTank;
-        private ArrayList<BackAxis> backAxesList;
-        private ArrayList<SteeringAxis> steeringAxesList;
+        private final Cabin cabin;
+        private final CentralUnit centralUnit;
+        private final Engine engine;
+        private final WaterTank waterTank;
+        private final FoamPowderTank foamPowderTank;
+        private final ArrayList<BackAxis> backAxesList;
+        private final ArrayList<SteeringAxis> steeringAxesList;
         private ArrayList<RoofLight> roofLightsList;
         private ArrayList<SideLight> sideLightList;
         private ArrayList<HeadLight> headLightList;

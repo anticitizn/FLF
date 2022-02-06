@@ -5,7 +5,6 @@ import Steering.SteeringAxis;
 
 import javax.crypto.*;
 import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 public class CentralUnit {
@@ -65,7 +64,7 @@ public class CentralUnit {
             // Decrypt the text
             byte[] textDecrypted = desCipher.doFinal(textEncrypted);
             decrypted = textDecrypted;
-            System.out.println("Text Decryted : " + new String(textDecrypted));
+            System.out.println("Text Decrypted : " + new String(textDecrypted));
 
 
         } catch (
@@ -77,14 +76,7 @@ public class CentralUnit {
     public void checkDecryptedString()
     {
         if(new String(decrypted).contains("6072")){
-            if(isLocked)
-            {
-                isLocked=false;
-            }
-            else
-            {
-                isLocked=true;
-            }
+            isLocked= !isLocked;
         }
     }
 
