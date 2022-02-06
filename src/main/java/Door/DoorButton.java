@@ -1,8 +1,9 @@
 package Door;
 
+@SuppressWarnings({"ALL", "ClassCanBeRecord"})
 public class DoorButton {
 
-    private DoorButtonPosition doorButtonPosition;
+    private final DoorButtonPosition doorButtonPosition;
 
     public DoorButton(DoorButtonPosition doorButtonPosition)
     {

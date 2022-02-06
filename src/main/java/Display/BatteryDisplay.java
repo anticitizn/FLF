@@ -28,6 +28,6 @@ public class BatteryDisplay {
 
     public void showPercentEnergy()
     {
-        System.out.println("The mean value of the rest energy from all four batteris is " + chargeToPercent() + "%");
+        System.out.println("The mean value of the rest energy from all four batteries is " + chargeToPercent() + "%");
     }
 }

@@ -4,7 +4,7 @@ import Equipment.Equipment;
 
 public abstract class RotaryButton {
     protected int state = 0;
-    protected Equipment equipment;
+    protected final Equipment equipment;
 
     public RotaryButton(Equipment Equipment) {
         equipment = Equipment;

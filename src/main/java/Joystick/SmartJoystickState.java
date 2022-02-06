@@ -4,8 +4,8 @@ import Equipment.Equipment;
 import MixingUnit.MixingUnit;
 
 public abstract class SmartJoystickState {
-    Equipment launcher;
-    MixingUnit mixingUnit;
+    final Equipment launcher;
+    final MixingUnit mixingUnit;
 
     public SmartJoystickState(Equipment Launcher, MixingUnit MixingUnit) {
         launcher = Launcher;

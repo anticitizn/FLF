@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public class Wheel {
 
-    private String id;
+    private final String id;
 
     public Wheel(){
         id = UUID.randomUUID().toString();

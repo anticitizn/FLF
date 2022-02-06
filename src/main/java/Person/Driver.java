@@ -1,6 +1,5 @@
 package Person;
 
-import ID.IDCard;
 import Pedal.BrakePedal;
 import Pedal.GasPedal;
 import Steering.SteeringWheel;

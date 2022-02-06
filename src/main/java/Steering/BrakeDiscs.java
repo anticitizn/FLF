@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public class BrakeDiscs {
 
-    private String id;
+    private final String id;
 
     public BrakeDiscs(){
         id = UUID.randomUUID().toString();

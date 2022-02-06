@@ -1,7 +1,6 @@
 package Person;
 
 import ControlPanel.ControlPanel;
-import ID.IDCard;
 
 public class Operator extends Person{
 

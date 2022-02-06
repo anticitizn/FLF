@@ -7,9 +7,9 @@ import java.util.ArrayList;
 public abstract class Light implements ILight {
 
     protected boolean isOn=false;
-    protected Position position;
-    protected ArrayList<LED> led;
-    protected int ledAmount;
+    protected final Position position;
+    protected final ArrayList<LED> led;
+    protected final int ledAmount;
 
     public Light(Position position, int ledAmount)
     {

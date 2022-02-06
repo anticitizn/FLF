@@ -5,9 +5,9 @@ import java.util.UUID;
 
 public abstract class Axes {
 
-    protected ArrayList<Wheel> wheelList;
-    protected ArrayList<BrakeDiscs> brakeDiscsList;
-    protected String id;
+    protected final ArrayList<Wheel> wheelList;
+    protected final ArrayList<BrakeDiscs> brakeDiscsList;
+    protected final String id;
 
     public Axes()
     {
@@ -15,7 +15,7 @@ public abstract class Axes {
         brakeDiscsList = new ArrayList<>();
 
         addWheels();
-        addBrakeDics();
+        addBrakeDiscs();
 
         id = UUID.randomUUID().toString();
 
@@ -28,14 +28,14 @@ public abstract class Axes {
         }
     }
 
-    public void addBrakeDics()
+    public void addBrakeDiscs()
     {
         for (int i = 0; i <= 5; i++) {
             brakeDiscsList.add(new BrakeDiscs());
         }
     }
 
-    public ArrayList<BrakeDiscs> getBrakeDicsList() {
+    public ArrayList<BrakeDiscs> getBrakeDiscsList() {
         return brakeDiscsList;
     }
 

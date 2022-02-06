@@ -22,12 +22,6 @@ public class Application {
         flf.getCabin().getSeatsList().get(1).setOperator(operator);
 
 
-        /*byte[] encryption = driver.getIdCard().getRfidChip().encrypt();
-        System.out.println(encryption);
-        flf.getCabin().getBusDoorsList().get(0).getReceiverModule().insertIDCard(encryption);
-        System.out.println(flf.getCentralUnit().getEncryption());
-        //flf.getCentralUnit().decrypt(flf.getCentralUnit().getEncryption());*/
-
         SecretKey secretKey = driver.getIdCard().getRfidChip().getMyDesKey();
         Cipher cipher = driver.getIdCard().getRfidChip().getDesCipher();
         byte[] encryption = driver.getIdCard().getRfidChip().encrypt(secretKey,cipher);
@@ -104,7 +98,7 @@ public class Application {
         System.out.println("-----------------------------");
         System.out.println("-----------------------------");
 
-        //Check if driver can press gaspedal and check correct enegery + speed amount
+        //Check if driver can press gasPedal and check correct energy + speed amount
         for (int i = 0; i < 20; i++) {
            driver.getGasPedal().press();
         }
@@ -117,7 +111,7 @@ public class Application {
         System.out.println("-----------------------------");
         System.out.println("-----------------------------");
 
-        //Check rotation of steering wheel is correctly transfered to the steering axis
+        //Check rotation of steering wheel is correctly transferred to the steering axis
         driver.getSteeringWheel().setRotation(5);
 
         for (int i = 0; i < flf.getSteeringAxesList().size(); i++) {

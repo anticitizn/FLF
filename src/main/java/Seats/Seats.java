@@ -6,7 +6,7 @@ import Position.Position;
 
 public class Seats {
 
-    private Position position;
+    private final Position position;
     private Driver driver;
     private Operator operator;
     private BreathingEquipment breathingEquipment;

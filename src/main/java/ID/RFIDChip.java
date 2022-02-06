@@ -4,6 +4,7 @@ package ID;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -12,11 +13,12 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
+@SuppressWarnings("ALL")
 public class RFIDChip {
 
-    private int id;
-    private String firstName;
-    private String lastName;
+    private final int id;
+    private final String firstName;
+    private final String lastName;
     private SecretKey myDesKey;
     private Cipher desCipher;
 
@@ -35,8 +37,7 @@ public class RFIDChip {
         try {
 
             KeyGenerator keygenerator = KeyGenerator.getInstance("DES");
-            SecretKey myDesKey = keygenerator.generateKey();
-            this.myDesKey = myDesKey;
+            this.myDesKey = keygenerator.generateKey();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -50,9 +51,7 @@ public class RFIDChip {
             //Create the cipher
             desCipher = Cipher.getInstance("DES/ECB/PKCS5Padding");
             this.desCipher=desCipher;
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchPaddingException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
         return desCipher;
@@ -77,7 +76,7 @@ public class RFIDChip {
             // Encrypt the text
             textEncrypted = desCipher.doFinal(text);
 
-            System.out.println("Text Encryted : " + textEncrypted);
+            System.out.println("Text Encrypted : " + Arrays.toString(textEncrypted));
 
             return textEncrypted;
 

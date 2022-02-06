@@ -43,6 +43,7 @@ public class TestApplication {
         Assertions.assertNotNull(flf.getCabin().getSeatsList().get(1).getOperator());
     }
 
+    @SuppressWarnings("SpellCheckingInspection")
     public void seatsUnoccuiped()
     {
         for (int i = 0; i < flf.getCabin().getSeatsList().size(); i++) {
@@ -215,7 +216,7 @@ public class TestApplication {
         frontLauncherDeactivated();
 
 
-        //All lights are off exepct the head lights and the warning lights. So the operator is turning those one on
+        //All lights are off except the head lights and the warning lights. So the operator is turning those one on
         allLightsOff();
         operator.getControlPanel().switchOnHeadLights();
         operator.getControlPanel().switchOnWarningLights();
@@ -246,7 +247,7 @@ public class TestApplication {
         frontLauncherDeactivated();
 
 
-        //All lights are on exepct the side lights.So the operator is turning this one off
+        //All lights are on except the side lights.So the operator is turning this one off
         allLightsOn();
         operator.getControlPanel().switchOffSideLights();
         for (int i = 0; i < flf.getSideLightList().size(); i++) {
@@ -260,7 +261,7 @@ public class TestApplication {
 
     @Order(6)
     @Test
-    @DisplayName("Fueltruck on Fire  works correctly")
+    @DisplayName("FuelTruck on Fire  works correctly")
     public void handleFuelTruckOnFire()
     {
         engineOn();
