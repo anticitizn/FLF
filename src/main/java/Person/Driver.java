@@ -1,17 +1,17 @@
 package Person;
 
+import Joystick.AbstractJoystick;
 import Pedal.BrakePedal;
 import Pedal.GasPedal;
 import Steering.SteeringWheel;
 
 public class Driver extends Person{
-
     private SteeringWheel steeringWheel;
     private GasPedal gasPedal;
     private BrakePedal brakePedal;
 
-    public Driver(int id, final String firstName, final String lastName, final String dateOfBirthString){
-        super(id,firstName, lastName, dateOfBirthString);
+    public Driver(int id, final String firstName, final String lastName, final String dateOfBirthString, AbstractJoystick joystick){
+        super(id,firstName, lastName, dateOfBirthString, joystick);
 
     }
 

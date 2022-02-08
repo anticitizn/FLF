@@ -1,4 +1,5 @@
 import Engine.Engine;
+import Equipment.FloorSprayNozzle;
 import FLF.FLF;
 import Person.Driver;
 import Person.Operator;
@@ -24,8 +25,8 @@ public class TestApplication {
     @BeforeEach
     public void setup() {
         flf = new FLF.Builder(new Engine(), new WaterTank(), new FoamPowderTank()).build();
-        driver = new Driver(1,"Elon","Musk","28.6.1971");
-        operator = new Operator(2,"Jeff","Bezos","12.1.1964");
+        driver = new Driver(1,"Elon","Musk","28.6.1971", flf.getCabin().getFrontLauncherJoystick());
+        operator = new Operator(2,"Jeff","Bezos","12.1.1964", flf.getCabin().getRoofExtinguishingArmJoystick());
 
         flf.getCabin().getBatteryDisplay().setBatteryManagement(flf.getEngine().getBatteryManagement());
 
@@ -163,6 +164,10 @@ public class TestApplication {
         Assertions.assertEquals(0,flf.getRoofExtinguishingArm().getFirstArmSegment().getRotation());
     }
 
+    public void checkBatteryUsageCorrect(int speed, int iterations) {
+        Assertions.assertEquals(400000 - speed*iterations*25, flf.getEngine().getBatteryManagement().getCapacity());
+    }
+
     @Order(1)
     @Test
     @DisplayName("FLF fully created by Builder")
@@ -214,8 +219,7 @@ public class TestApplication {
         roofExtinguishingArmRetracted();
         frontLauncherDeactivated();
 
-
-        //All lights are off exepct the head lights and the warning lights. So the operator is turning those one on
+        // All lights are off except the head lights and the warning lights. So the operator is turning those on
         allLightsOff();
         operator.getControlPanel().switchOnHeadLights();
         operator.getControlPanel().switchOnWarningLights();
@@ -227,11 +231,40 @@ public class TestApplication {
             Assertions.assertTrue(flf.getWarningLightList().get(i).checkIsOn());
         }
 
-
         bothTanksFilled();
         rotaryButtonsOnState1();
 
+        for (int i = 0; i < 7; i++) {
+            driver.getGasPedal().press();
+        }
 
+        for (int i = 0; i < 5; i++) {
+            flf.travel();
+        }
+
+        driver.getSteeringWheel().setRotation(-5);
+        for (int i = 0; i < 3; i++) {
+            flf.travel();
+        }
+        Assertions.assertEquals(-5, driver.getSteeringWheel().getRotation());
+
+        driver.getSteeringWheel().setRotation(0);
+        for (int i = 0; i < 5; i++) {
+            flf.travel();
+        }
+        Assertions.assertEquals(0, driver.getSteeringWheel().getRotation());
+
+        driver.getSteeringWheel().setRotation(5);
+        for (int i = 0; i < 5; i++) {
+            flf.travel();
+        }
+        Assertions.assertEquals(5, driver.getSteeringWheel().getRotation());
+
+        for (int i = 0; i < 7; i++) {
+            driver.getBrakePedal().press();
+        }
+
+        checkBatteryUsageCorrect(28,18);
     }
 
     @Order(5)
@@ -245,8 +278,7 @@ public class TestApplication {
         roofExtinguishingArmRetracted();
         frontLauncherDeactivated();
 
-
-        //All lights are on exepct the side lights.So the operator is turning this one off
+        // All lights are on except the side lights. So the operator is turning this one off
         allLightsOn();
         operator.getControlPanel().switchOffSideLights();
         for (int i = 0; i < flf.getSideLightList().size(); i++) {
@@ -255,6 +287,16 @@ public class TestApplication {
 
         bothTanksFilled();
         rotaryButtonsOnState1();
+
+        for (int i = 0; i < 20; i++) {
+            driver.getGasPedal().press();
+        }
+
+        for (int i = 0; i < 10; i++) {
+            flf.travel();
+        }
+
+        checkBatteryUsageCorrect(80, 10);
 
     }
 
@@ -268,6 +310,12 @@ public class TestApplication {
         busDoorsClosed();
         allLightsOn();
         bothTanksFilled();
+
+        for (FloorSprayNozzle floorSprayNozzle : flf.getFloorSprayNozzleList() ) {
+            floorSprayNozzle.shoot();
+        }
+        Assertions.assertEquals(12100, flf.getWaterTank().getCapacity());
+
 
     }
 
