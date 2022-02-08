@@ -297,12 +297,11 @@ public class TestApplication {
         }
 
         checkBatteryUsageCorrect(80, 10);
-
     }
 
     @Order(6)
     @Test
-    @DisplayName("Fueltruck on Fire  works correctly")
+    @DisplayName("Fuel truck on Fire  works correctly")
     public void handleFuelTruckOnFire()
     {
         engineOn();
@@ -314,9 +313,36 @@ public class TestApplication {
         for (FloorSprayNozzle floorSprayNozzle : flf.getFloorSprayNozzleList() ) {
             floorSprayNozzle.shoot();
         }
-        Assertions.assertEquals(12100, flf.getWaterTank().getCapacity());
+        Assertions.assertEquals(11800, flf.getWaterTank().getCapacity());
 
+        operator.getControlPanel().getRotaryButtonFrontLauncher().setState(6);
+        driver.getJoystick().pressLeftButton();
+        driver.getJoystick().pressRightButton();
+        driver.getJoystick().pressRightButton();
 
+        for (int i = 0; i < 3; i++) {
+            driver.getJoystick().pressBackButton();
+        }
+
+        Assertions.assertTrue(flf.getFrontLauncher().isActive());
+        Assertions.assertEquals(3000, flf.getFrontLauncher().getOutputRate());
+
+        Assertions.assertEquals(11800 - 9000*0.95, flf.getWaterTank().getCapacity());
+        Assertions.assertEquals(2500 - 9000*0.05, flf.getFoamPowderTank().getCapacity());
+
+        operator.getControlPanel().getRotaryButtonFrontExtinguishingArm().setState(3);
+        operator.getJoystick().pressLeftButton();
+        operator.getJoystick().pressRightButton();
+
+        for (int i = 0; i < 3; i++) {
+            operator.getJoystick().pressBackButton();
+        }
+
+        Assertions.assertTrue(flf.getRoofExtinguishingArm().isActive());
+        Assertions.assertEquals(2500, flf.getRoofExtinguishingArm().getOutputRate());
+
+        Assertions.assertEquals(0, flf.getWaterTank().getCapacity());
+        Assertions.assertEquals(1300, flf.getFoamPowderTank().getCapacity());
     }
 
     @Order(7)
@@ -330,6 +356,37 @@ public class TestApplication {
         allLightsOn();
         bothTanksFilled();
 
+        operator.getControlPanel().getRotaryButtonFrontLauncher().setState(7);
+
+        driver.getJoystick().pressLeftButton();
+        for (int i = 0; i < 3; i++) {
+            driver.getJoystick().pressRightButton();
+        }
+
+        for (int i = 0; i < 3; i++) {
+            driver.getJoystick().pressBackButton();
+        }
+
+        Assertions.assertTrue(flf.getFrontLauncher().isActive());
+        Assertions.assertEquals(3500, flf.getFrontLauncher().getOutputRate());
+
+        Assertions.assertEquals(12500 - 10500*0.9, flf.getWaterTank().getCapacity());
+        Assertions.assertEquals(2500 - 10500*0.1, flf.getFoamPowderTank().getCapacity());
+
+        operator.getControlPanel().getRotaryButtonFrontExtinguishingArm().setState(2);
+        operator.getJoystick().pressLeftButton();
+        operator.getJoystick().pressRightButton();
+        operator.getJoystick().pressRightButton();
+
+        for (int i = 0; i < 3; i++) {
+            operator.getJoystick().pressBackButton();
+        }
+
+        Assertions.assertTrue(flf.getRoofExtinguishingArm().isActive());
+        Assertions.assertEquals(1000, flf.getRoofExtinguishingArm().getOutputRate());
+
+        Assertions.assertEquals(140, flf.getWaterTank().getCapacity());
+        Assertions.assertEquals(1360, flf.getFoamPowderTank().getCapacity());
     }
 
     @Order(8)
@@ -343,12 +400,50 @@ public class TestApplication {
         allLightsOn();
         bothTanksFilled();
 
+        operator.getControlPanel().getRotaryButtonFrontLauncher().setState(7);
+
+        driver.getJoystick().pressLeftButton();
+        for (int i = 0; i < 3; i++) {
+            driver.getJoystick().pressRightButton();
+        }
+
+        for (int i = 0; i < 5; i++) {
+            driver.getJoystick().pressBackButton();
+        }
+
+        Assertions.assertTrue(flf.getFrontLauncher().isActive());
+        Assertions.assertEquals(3500, flf.getFrontLauncher().getOutputRate());
+
+        Assertions.assertEquals(0, flf.getWaterTank().getCapacity());
+        Assertions.assertEquals(750, flf.getFoamPowderTank().getCapacity());
+
+        operator.getControlPanel().getRotaryButtonFrontExtinguishingArm().setState(3);
+        operator.getJoystick().pressLeftButton();
+
+        for (int i = 0; i < 3; i++) {
+            operator.getJoystick().pressRightButton();
+        }
+
+        for (int i = 0; i < 5; i++) {
+            operator.getJoystick().pressBackButton();
+        }
+
+        Assertions.assertTrue(flf.getRoofExtinguishingArm().isActive());
+        Assertions.assertEquals(2500, flf.getRoofExtinguishingArm().getOutputRate());
+
+        Assertions.assertEquals(0, flf.getWaterTank().getCapacity());
+        Assertions.assertEquals(125, flf.getFoamPowderTank().getCapacity());
+
+        operator.getControlPanel().getRotaryButtonFrontLauncher().setState(2);
+        driver.getJoystick().pressRightButton();
+        driver.getJoystick().pressRightButton();
+
+        for (int i = 0; i < 5; i++) {
+            driver.getJoystick().pressBackButton();
+        }
+
+        Assertions.assertEquals(0, flf.getWaterTank().getCapacity());
+        Assertions.assertEquals(125, flf.getFoamPowderTank().getCapacity());
     }
-
-
-
-
-
-
 
 }

@@ -15,8 +15,8 @@ public class Application {
         FLF flf = new FLF.Builder(new Engine(), new WaterTank(), new FoamPowderTank()).build();
 
 
-        Driver driver = new Driver(1,"Elon","Musk","28.6.1971");
-        Operator operator = new Operator(2,"Jeff","Bezos","12.1.1964");
+        Driver driver = new Driver(1,"Elon","Musk","28.6.1971", flf.getCabin().getFrontLauncherJoystick());
+        Operator operator = new Operator(2,"Jeff","Bezos","12.1.1964", flf.getCabin().getRoofExtinguishingArmJoystick());
 
         flf.getCabin().getSeatsList().get(0).setDriver(driver);
         flf.getCabin().getSeatsList().get(1).setOperator(operator);
