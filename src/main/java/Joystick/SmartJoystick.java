@@ -8,15 +8,15 @@ public class SmartJoystick extends AbstractJoystick{
     private SmartJoystickState state;
 
     public SmartJoystick(Equipment Launcher, MixingUnit MixingUnit) {
-        super(Launcher, MixingUnit);
+        super(Launcher);
     }
 
     @Override
     public void pressLeftButton() {
         if (state instanceof SmartJoystickDeactivated) {
-            state = new SmartJoystickActivated(launcher, mixingUnit);
+            state = new SmartJoystickActivated(launcher);
         } else {
-            state = new SmartJoystickDeactivated(launcher, mixingUnit);
+            state = new SmartJoystickDeactivated(launcher);
         }
     }
 

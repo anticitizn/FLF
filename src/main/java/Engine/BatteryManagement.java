@@ -1,7 +1,9 @@
 package Engine;
 
+import Task_05_Adapter.IEChargingStation;
+
 @SuppressWarnings("ALL")
-public class BatteryManagement {
+public class BatteryManagement implements IEChargingStation {
     private final Battery[][] batteryBox = new Battery[2][2];
 
     public BatteryManagement()
@@ -21,11 +23,19 @@ public class BatteryManagement {
         return batteryBox;
     }
 
+    @Override
+    public void chargeWith3Poles(int[] amount) {
+        for (int i = 0; i < amount.length; i++) {
+            charge(amount[i]);
+        }
+    }
+
     public void charge(int amount)
     {
+
         for (int i = 0; i < batteryBox.length; i++) {
             for (int j = 0; j < batteryBox[i].length; j++) {
-                batteryBox[i][j].charge(amount);
+                batteryBox[i][j].charge(amount/4);
             }
         }
     }

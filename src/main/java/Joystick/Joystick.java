@@ -5,8 +5,8 @@ import MixingUnit.MixingUnit;
 
 public class Joystick extends AbstractJoystick{
 
-    public Joystick(Equipment Launcher, MixingUnit MixingUnit) {
-        super(Launcher, MixingUnit);
+    public Joystick(Equipment Launcher) {
+        super(Launcher);
     }
 
     public void pressLeftButton() {
@@ -21,7 +21,7 @@ public class Joystick extends AbstractJoystick{
     @Override
     public void pressRightButton() {
         if (launcher.isActive()) {
-            mixingUnit.switchRatio(launcher.getEquipmentType());
+            mixingUnitComponent.switchRatio(launcher.getEquipmentType());
         }
     }
 

@@ -1,15 +1,16 @@
 package Equipment;
 
-import MixingUnit.MixingUnit;
+import Task_01_Component.MixingUnitComponent;
+import Task_09_Visitor.IVisitor;
 
 public class RoofExtinguishingArm extends Equipment {
 
-    private final MixingUnit mixingUnit;
+    private MixingUnitComponent mixingUnitComponent;
     private final FirstArmSegment firstArmSegment = new FirstArmSegment();
     private final SecondArmSegment secondArmSegment = new SecondArmSegment();
 
-    public RoofExtinguishingArm(MixingUnit MixingUnit) {
-        mixingUnit = MixingUnit;
+    public RoofExtinguishingArm() {
+
         this.equipmentType = EquipmentType.RoofExtinguishingArm;
     }
 
@@ -17,9 +18,14 @@ public class RoofExtinguishingArm extends Equipment {
         return firstArmSegment;
     }
 
+
+    public void setMixingUnitComponent(MixingUnitComponent mixingUnitComponent) {
+        this.mixingUnitComponent = mixingUnitComponent;
+    }
+
     @Override
     public void shoot() {
-        mixingUnit.drain(outputRate, equipmentType);
+        mixingUnitComponent.drain(outputRate, this);
     }
 
     @Override
@@ -32,5 +38,9 @@ public class RoofExtinguishingArm extends Equipment {
     public void deactivate() {
         firstArmSegment.setRotation(0);
         active = false;
+    }
+
+    public void accept(IVisitor visitor) {
+        visitor.visit(this);
     }
 }

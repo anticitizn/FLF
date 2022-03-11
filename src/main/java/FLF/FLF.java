@@ -40,7 +40,6 @@ public class FLF {
     private final FrontLauncher frontLauncher;
     private final ArrayList<FloorSprayNozzle> floorSprayNozzleList;
     private final RoofExtinguishingArm roofExtinguishingArm;
-    private final MixingUnit mixingUnit;
 
     protected FLF (Builder builder)
     {
@@ -61,7 +60,6 @@ public class FLF {
         frontLauncher= builder.frontLauncher;
         floorSprayNozzleList = builder.floorSprayNozzleList;
         roofExtinguishingArm= builder.roofExtinguishingArm;
-        mixingUnit= builder.mixingUnit;
     }
 
     public Cabin getCabin() {
@@ -128,9 +126,6 @@ public class FLF {
         return roofExtinguishingArm;
     }
 
-    public MixingUnit getMixingUnit() {
-        return mixingUnit;
-    }
 
     public CentralUnit getCentralUnit() {
         return centralUnit;
@@ -159,22 +154,23 @@ public class FLF {
         private final FrontLauncher frontLauncher;
         private final ArrayList<FloorSprayNozzle> floorSprayNozzleList;
         private final RoofExtinguishingArm roofExtinguishingArm;
-        private final MixingUnit mixingUnit;
 
         public Builder( Engine engine, WaterTank waterTank, FoamPowderTank foamPowderTank){
 
             this.engine=engine;
             this.waterTank=waterTank;
             this.foamPowderTank=foamPowderTank;
-            mixingUnit=new MixingUnit(waterTank, foamPowderTank);
 
-            frontLauncher=new FrontLauncher(mixingUnit);
+
+
+            frontLauncher=new FrontLauncher();
             floorSprayNozzleList = new ArrayList<>();
             for (int i = 0; i <= 6; i++) {
                 floorSprayNozzleList.add(new FloorSprayNozzle(waterTank));
             }
 
-            roofExtinguishingArm=new RoofExtinguishingArm(mixingUnit);
+
+            roofExtinguishingArm=new RoofExtinguishingArm();
 
             backAxesList = new ArrayList<>();
             for (int i = 0; i <= 1; i++) {
@@ -191,8 +187,8 @@ public class FLF {
             buildLights();
 
             cabin = new Cabin.Builder(
-                    new Cabin.DriverBuilder(new Joystick(frontLauncher, mixingUnit), new SteeringWheel(centralUnit), new SpeedDisplay(centralUnit), new GasPedal(centralUnit), new BrakePedal(centralUnit),frontLauncher, mixingUnit),
-                    new Cabin.OperatorBuilder(new Joystick(roofExtinguishingArm, mixingUnit), frontLauncher,roofExtinguishingArm, mixingUnit,engine, roofLightsList, sideLightList,  headLightList,
+                    new Cabin.DriverBuilder(new Joystick(frontLauncher), new SteeringWheel(centralUnit), new SpeedDisplay(centralUnit), new GasPedal(centralUnit), new BrakePedal(centralUnit),frontLauncher),
+                    new Cabin.OperatorBuilder(new Joystick(roofExtinguishingArm), frontLauncher,roofExtinguishingArm, engine, roofLightsList, sideLightList,  headLightList,
                             blueLightsList,  warningLightList),
                     centralUnit).build();
         }

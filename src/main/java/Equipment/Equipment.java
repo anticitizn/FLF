@@ -1,6 +1,8 @@
 package Equipment;
 
-public abstract class Equipment implements IEquipment{
+import Task_09_Visitor.IVisitable;
+
+public abstract class Equipment implements IEquipment, IVisitable {
     protected int outputRate = 500;
     protected boolean active = false;
     protected EquipmentType equipmentType = EquipmentType.Misc;

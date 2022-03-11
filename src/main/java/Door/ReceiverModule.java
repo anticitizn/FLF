@@ -15,4 +15,9 @@ public class ReceiverModule {
     {
         centralUnit.setEncrypted(encrypted);
     }
+
+    public void insertIDCard(String encrypted)
+    {
+        centralUnit.setEncrypted(encrypted);
+    }
 }

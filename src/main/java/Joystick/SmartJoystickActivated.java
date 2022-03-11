@@ -5,8 +5,8 @@ import MixingUnit.MixingUnit;
 
 public class SmartJoystickActivated extends SmartJoystickState{
 
-    public SmartJoystickActivated(Equipment Launcher, MixingUnit MixingUnit) {
-        super(Launcher, MixingUnit);
+    public SmartJoystickActivated(Equipment Launcher) {
+        super(Launcher);
     }
 
     @Override

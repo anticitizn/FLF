@@ -1,19 +1,27 @@
 package Equipment;
 
-import MixingUnit.MixingUnit;
+import Task_01_Component.MixingUnitComponent;
+import Task_09_Visitor.IVisitor;
 
 public class FrontLauncher extends Equipment {
-    private final MixingUnit mixingUnit;
+
+    private MixingUnitComponent mixingUnitComponent;
     int rotation = 0;
 
-    public FrontLauncher(MixingUnit MixingUnit) {
-        mixingUnit = MixingUnit;
+    public FrontLauncher() {
+
         this.equipmentType = EquipmentType.FrontLauncher;
+    }
+
+
+
+    public void setMixingUnitComponent(MixingUnitComponent mixingUnitComponent) {
+        this.mixingUnitComponent = mixingUnitComponent;
     }
 
     @Override
     public void shoot() {
-        mixingUnit.drain(outputRate, equipmentType);
+        mixingUnitComponent.drain(outputRate, this);
     }
 
     @Override
@@ -26,5 +34,10 @@ public class FrontLauncher extends Equipment {
     public void deactivate() {
         rotation = 0;
         active = false;
+    }
+
+    @Override
+    public void accept(IVisitor visitor) {
+        visitor.visit(this);
     }
 }

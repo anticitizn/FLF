@@ -2,14 +2,18 @@ package Joystick;
 
 import Equipment.Equipment;
 import MixingUnit.MixingUnit;
+import Task_01_Component.MixingUnitComponent;
 
 public abstract class SmartJoystickState {
     final Equipment launcher;
-    final MixingUnit mixingUnit;
+    protected MixingUnitComponent mixingUnitComponent;
 
-    public SmartJoystickState(Equipment Launcher, MixingUnit MixingUnit) {
+    public SmartJoystickState(Equipment Launcher) {
         launcher = Launcher;
-        mixingUnit = MixingUnit;
+    }
+
+    public void setMixingUnitComponent(MixingUnitComponent mixingUnitComponent) {
+        this.mixingUnitComponent = mixingUnitComponent;
     }
 
     public abstract void pressBackButton();

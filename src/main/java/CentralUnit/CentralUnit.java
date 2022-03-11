@@ -1,15 +1,20 @@
 package CentralUnit;
 
 import Engine.Engine;
+import Equipment.FloorSprayNozzle;
+import Equipment.FrontLauncher;
+import Equipment.RoofExtinguishingArm;
 import Steering.SteeringAxis;
+import Task_09_Visitor.IVisitor;
 
 import javax.crypto.*;
 import java.security.InvalidKeyException;
 import java.util.ArrayList;
 
-public class CentralUnit {
+public class CentralUnit implements IVisitor {
     private final Engine engine;
     private final ArrayList<SteeringAxis> steeringAxes;
+    private String encryptedString;
     private byte[] encrypted;
     private byte[] decrypted;
     private boolean isLocked;
@@ -17,6 +22,16 @@ public class CentralUnit {
     public CentralUnit(Engine engine, ArrayList<SteeringAxis> steeringAxes) {
         this.engine = engine;
         this.steeringAxes = steeringAxes;
+    }
+
+    public void switchOnEngine()
+    {
+        engine.switchOn();
+    }
+
+    public void switchOffEngine()
+    {
+        engine.switchOff();
     }
 
     public int getSpeed() {
@@ -55,6 +70,10 @@ public class CentralUnit {
         this.encrypted = encrypted;
     }
 
+    public void setEncrypted(String encrypted) {
+        this.encryptedString = encrypted;
+    }
+
     public void decrypt(byte[] textEncrypted,SecretKey secretKey, Cipher desCipher) {
         try {
 
@@ -86,5 +105,20 @@ public class CentralUnit {
 
     public void setIsLocked(boolean locked) {
         isLocked = locked;
+    }
+
+    @Override
+    public void visit(FrontLauncher frontLauncher) {
+        frontLauncher.shoot();
+    }
+
+    @Override
+    public void visit(RoofExtinguishingArm roofExtinguishingArm) {
+        roofExtinguishingArm.shoot();
+    }
+
+    @Override
+    public void visit(FloorSprayNozzle floorSprayNozzle) {
+        floorSprayNozzle.shoot();
     }
 }

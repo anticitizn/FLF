@@ -1,14 +1,21 @@
 package Engine;
 
+import Task_03_Composite.MainCell;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Battery {
 
     private final int[][][] capacity = new int[100][10][100];
     private int charging = 0;
+    private ArrayList<MainCell> mainCellList;
 
     public Battery(){
+
         batteryInit();
+        mainCellList = new ArrayList<>();
+        fillMainCellArrayList();
     }
 
     public void batteryInit() {
@@ -56,5 +63,15 @@ public class Battery {
 
     public int getCapacity(){
         return charging;
+    }
+
+    public void fillMainCellArrayList(){
+        for (int i = 0; i < 100; i++) {
+            mainCellList.add(new MainCell());
+        }
+    }
+
+    public ArrayList<MainCell> getMainCellList() {
+        return mainCellList;
     }
 }

@@ -135,7 +135,7 @@ public class Cabin {
         private final BrakePedal brakePedal;
         private final AbstractJoystick frontLauncherJoystick;
 
-        public DriverBuilder(AbstractJoystick joystick, SteeringWheel steeringWheel, SpeedDisplay speedDisplay, GasPedal gasPedal, BrakePedal brakePedal, FrontLauncher frontLauncher, MixingUnit mixingUnit) {
+        public DriverBuilder(AbstractJoystick joystick, SteeringWheel steeringWheel, SpeedDisplay speedDisplay, GasPedal gasPedal, BrakePedal brakePedal, FrontLauncher frontLauncher) {
             frontLauncherJoystick = joystick;
             this.steeringWheel=steeringWheel;
             this.speedDisplay = speedDisplay;
@@ -149,7 +149,7 @@ public class Cabin {
         private final ControlPanel controlPanel;
         private final AbstractJoystick roofExtinguishingArmJoystick;
 
-        public OperatorBuilder(AbstractJoystick joystick, FrontLauncher frontLauncher, RoofExtinguishingArm roofExtinguishingArm, MixingUnit mixingUnit,
+        public OperatorBuilder(AbstractJoystick joystick, FrontLauncher frontLauncher, RoofExtinguishingArm roofExtinguishingArm,
                                Engine engine, ArrayList<RoofLight> roofLightsList, ArrayList<SideLight> sideLightList, ArrayList<HeadLight> headLightList,
                                ArrayList<BlueLight> blueLightsList, ArrayList<WarningLight> warningLightList) {
             controlPanel = new ControlPanel(frontLauncher,roofExtinguishingArm, engine, roofLightsList, sideLightList, headLightList, blueLightsList, warningLightList);

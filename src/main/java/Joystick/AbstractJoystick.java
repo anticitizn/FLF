@@ -2,14 +2,18 @@ package Joystick;
 
 import Equipment.Equipment;
 import MixingUnit.MixingUnit;
+import Task_01_Component.MixingUnitComponent;
 
 public abstract class AbstractJoystick {
     final Equipment launcher;
-    final MixingUnit mixingUnit;
+    protected MixingUnitComponent mixingUnitComponent;
 
-    public AbstractJoystick(Equipment Launcher, MixingUnit MixingUnit) {
+    public AbstractJoystick(Equipment Launcher) {
         launcher = Launcher;
-        mixingUnit = MixingUnit;
+    }
+
+    public void setMixingUnitComponent(MixingUnitComponent mixingUnitComponent) {
+        this.mixingUnitComponent = mixingUnitComponent;
     }
 
     abstract public void pressLeftButton();

@@ -10,7 +10,7 @@ public abstract class Person {
     protected final String firstName;
     protected  final String lastName;
     protected final Calendar dateOfBirth;
-    protected final IDCard idCard;
+    protected IDCard idCard;
     private final AbstractJoystick joystick;
 
     public Person(int id, final String firstName, final String lastName, final String dateOfBirthString, AbstractJoystick joystick) {
@@ -18,8 +18,11 @@ public abstract class Person {
         this.firstName = firstName;
         this.lastName = lastName;
         dateOfBirth = Utility.convertStringToCalendarDate(dateOfBirthString);
-        idCard = new IDCard(id,firstName, lastName);
         this.joystick = joystick;
+    }
+
+    public void setIdCard(IDCard idCard) {
+        this.idCard = idCard;
     }
 
     public IDCard getIdCard() {
@@ -48,6 +51,15 @@ public abstract class Person {
 
     public AbstractJoystick getJoystick() {
         return joystick;
+    }
+
+    public String createEncryptedString(){
+        StringBuilder encryptedString = new StringBuilder();
+        encryptedString.append("FT-DUS-FLF-").
+                append(getID()).append("-").
+                append(getFirstName()).append(" ").
+                append(getLastName()).append("-6072");
+        return encryptedString.toString();
     }
 
     public boolean equals(Object object) {

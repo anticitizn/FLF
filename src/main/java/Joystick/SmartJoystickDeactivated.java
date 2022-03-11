@@ -5,12 +5,12 @@ import MixingUnit.MixingUnit;
 
 public class SmartJoystickDeactivated extends SmartJoystickState{
 
-    public SmartJoystickDeactivated(Equipment Launcher, MixingUnit MixingUnit) {
-        super(Launcher, MixingUnit);
+    public SmartJoystickDeactivated(Equipment Launcher) {
+        super(Launcher);
     }
 
     @Override
     public void pressBackButton() {
-        mixingUnit.switchRatio(launcher.getEquipmentType());
+        mixingUnitComponent.switchRatio(launcher.getEquipmentType());
     }
 }

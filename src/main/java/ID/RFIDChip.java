@@ -2,6 +2,8 @@ package ID;
 
 
 
+import Task_04_Strategy.IEncryption;
+
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
@@ -21,15 +23,21 @@ public class RFIDChip {
     private final String lastName;
     private SecretKey myDesKey;
     private Cipher desCipher;
+    private final IEncryption encryption;
 
 
 
-    public RFIDChip(int id, String firstName, String lastName) {
+    public RFIDChip(int id, String firstName, String lastName, IEncryption encryption) {
 
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.encryption=encryption;
 
+    }
+
+    public String doEncryption(String strToEncrypt){
+        return encryption.doEncryption(strToEncrypt);
     }
 
     public SecretKey getMyDesKey()
