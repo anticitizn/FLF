@@ -1,10 +1,12 @@
 package Light;
 
 import Position.Position;
+import Task_02_SOA.*;
+import com.google.common.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
-public abstract class Light implements ILight {
+public abstract class Light extends Subscriber implements ILight  {
 
     protected boolean isOn=false;
     protected final Position position;
@@ -21,7 +23,6 @@ public abstract class Light implements ILight {
         for (int i = 0; i < ledAmount; i++) {
             led.add(new LED());
         }
-
     }
 
 }

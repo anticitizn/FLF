@@ -6,35 +6,31 @@ import Equipment.RoofExtinguishingArm;
 import Light.*;
 import RotaryButton.RotaryButtonFrontExtinguishingArm;
 import RotaryButton.RotaryButtonFrontLauncher;
+import Task_02_SOA.Subscriber;
+import Task_02_SOA.SwitchRoofLightEvent;
+import com.google.common.eventbus.EventBus;
 
 import java.util.ArrayList;
 
 
 public class ControlPanel {
-
+    private final EventBus eventBus;
+    private int eventID;
     private final RotaryButtonFrontExtinguishingArm rotaryButtonFrontExtinguishingArm;
     private final RotaryButtonFrontLauncher rotaryButtonFrontLauncher;
     private final Engine engine;
-    private final ArrayList<RoofLight> roofLightsList;
-    private final ArrayList<SideLight> sideLightList;
-    private final ArrayList<HeadLight> headLightList;
-    private final ArrayList<BlueLight> blueLightsList;
-    private final ArrayList<WarningLight> warningLightList;
 
-    public ControlPanel(FrontLauncher frontLauncher, RoofExtinguishingArm roofExtinguishingArm, Engine engine,
-                        ArrayList<RoofLight> roofLightsList, ArrayList<SideLight> sideLightList, ArrayList<HeadLight> headLightList,
-                        ArrayList<BlueLight> blueLightsList, ArrayList<WarningLight> warningLightList)
+    public ControlPanel(FrontLauncher frontLauncher, RoofExtinguishingArm roofExtinguishingArm, Engine engine)
     {
         rotaryButtonFrontExtinguishingArm = new RotaryButtonFrontExtinguishingArm(roofExtinguishingArm);
         rotaryButtonFrontLauncher = new RotaryButtonFrontLauncher(frontLauncher);
 
         this.engine= engine;
+        this.eventBus = new EventBus();
+    }
 
-        this.roofLightsList=roofLightsList;
-        this.sideLightList=sideLightList;
-        this.headLightList=headLightList;
-        this.blueLightsList=blueLightsList;
-        this.warningLightList=warningLightList;
+    public void addSubscriber(Subscriber subscriber) {
+        eventBus.register(subscriber);
     }
 
     public RotaryButtonFrontExtinguishingArm getRotaryButtonFrontExtinguishingArm() {
@@ -45,74 +41,29 @@ public class ControlPanel {
         return rotaryButtonFrontLauncher;
     }
 
-    public void switchOnRoofLights()
+    public void switchRoofLights()
     {
-        for (RoofLight roofLight : roofLightsList) {
-            roofLight.switchOn();
-        }
+        eventBus.post(new SwitchRoofLightEvent(eventID++));
     }
 
-    public void switchOffRoofLights()
+    public void switchSideLights()
     {
-        for (RoofLight roofLight : roofLightsList) {
-            roofLight.switchOff();
-        }
+        eventBus.post(new SwitchRoofLightEvent(eventID++));
     }
 
-    public void switchOnSideLights()
+    public void switchHeadLights()
     {
-        for (SideLight sideLight : sideLightList) {
-            sideLight.switchOn();
-        }
+        eventBus.post(new SwitchRoofLightEvent(eventID++));
     }
 
-    public void switchOffSideLights()
+    public void switchWarningLights()
     {
-        for (SideLight sideLight : sideLightList) {
-            sideLight.switchOff();
-        }
+        eventBus.post(new SwitchRoofLightEvent(eventID++));
     }
 
-    public void switchOnHeadLights()
+    public void switchBlueLights()
     {
-        for (HeadLight headLight : headLightList) {
-            headLight.switchOn();
-        }
-    }
-
-    public void switchOffHeadLights()
-    {
-        for (HeadLight headLight : headLightList) {
-            headLight.switchOff();
-        }
-    }
-
-    public void switchOnWarningLights()
-    {
-        for (WarningLight warningLight : warningLightList) {
-            warningLight.switchOn();
-        }
-    }
-
-    public void switchOffWarningLights()
-    {
-        for (WarningLight warningLight : warningLightList) {
-            warningLight.switchOff();
-        }
-    }
-
-    public void switchOnBlueLights()
-    {
-        for (BlueLight bluelight : blueLightsList) {
-            bluelight.switchOn();
-        }
-    }
-
-    public void switchOffBlueLights()
-    {
-        for (BlueLight bluelight : blueLightsList) {
-            bluelight.switchOff();
-        }
+        eventBus.post(new SwitchRoofLightEvent(eventID++));
     }
 
     public void switchOnEngine()

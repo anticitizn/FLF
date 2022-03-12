@@ -13,7 +13,6 @@ import Task_05_Adapter.EChargingAdapter;
 import Task_05_Adapter.IEChargingStation;
 import Task_09_Visitor.IVisitable;
 
-
 import java.io.BufferedReader;
 
 import java.io.InputStream;

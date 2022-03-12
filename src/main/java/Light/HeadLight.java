@@ -1,6 +1,8 @@
 package Light;
 
 import Position.Position;
+import Task_02_SOA.SwitchHeadLightEvent;
+import com.google.common.eventbus.Subscribe;
 
 public class HeadLight extends Light {
 
@@ -8,14 +10,9 @@ public class HeadLight extends Light {
         super(position, ledAmount);
     }
 
-    public void switchOn()
-    {
-        isOn=true;
-    }
-
-    public void switchOff()
-    {
-        isOn=false;
+    @Subscribe
+    public void receive(SwitchHeadLightEvent event) {
+        isOn = !isOn;
     }
 
     public boolean checkIsOn()
