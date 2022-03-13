@@ -1,5 +1,13 @@
 package Light;
 
 public class LED {
-    public LED(){}
+    private LightColor lightColor;
+    public LED ()
+    {
+        lightColor = LightColor.Off;
+    }
+
+    public void setColor(LightColor lightColor) {
+        this.lightColor = lightColor;
+    }
 }

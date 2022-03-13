@@ -1,19 +1,28 @@
 package Tank;
 
+import Task_08_Observer.ITankCapacityListener;
+
+import java.util.ArrayList;
+
 @SuppressWarnings("ALL")
 public abstract class Tank implements ITank{
+    private final int maxCapacity;
     private final int length;
     private final int width;
     private final int height;
     private int filled;
     private final int[][][] capacity;
+    private final ArrayList<ITankCapacityListener> listenerList;
 
     public Tank(int Length, int Height, int Width){
+        listenerList = new ArrayList<>();
+
         length = Length;
         height = Height;
         width = Width;
 
         filled = length * width * height;
+        maxCapacity = filled;
 
         capacity = new int[length][height][width];
         for (int i = 0; i < length; i++) {
@@ -23,6 +32,14 @@ public abstract class Tank implements ITank{
                 }
             }
         }
+    }
+
+    public void addListener(ITankCapacityListener listener) {
+        listenerList.add(listener);
+    }
+
+    public void removeListener(ITankCapacityListener listener) {
+        listenerList.remove(listener);
     }
 
     public void fill(int amount) {
@@ -59,8 +76,23 @@ public abstract class Tank implements ITank{
         }
     }
 
-
     public int getCapacity(){
         return filled;
+    }
+
+    private void callCapacityListeners() {
+        if (getCapacity() < maxCapacity * 0.1) {
+            for (ITankCapacityListener listener : listenerList) {
+                listener.tenthCapacity();
+            }
+        } else if (getCapacity() < maxCapacity * 0.25) {
+            for (ITankCapacityListener listener : listenerList) {
+                listener.quarterCapacity();
+            }
+        } else if (getCapacity() < maxCapacity * 0.5) {
+            for (ITankCapacityListener listener : listenerList) {
+                listener.halfCapacity();
+            }
+        }
     }
 }

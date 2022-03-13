@@ -3,9 +3,11 @@ package ControlPanel;
 import Engine.Engine;
 import Equipment.FrontLauncher;
 import Equipment.RoofExtinguishingArm;
+import Light.LED;
 import RotaryButton.RotaryButtonFrontExtinguishingArm;
 import RotaryButton.RotaryButtonFrontLauncher;
 import CentralUnit.*;
+import Task_08_Observer.CapacityLEDController;
 
 import Task_07_Command.*;
 
@@ -21,6 +23,12 @@ public class ControlPanel {
     private final Switch sideLightSwitch;
     private final Switch warningLightSwitch;
 
+    private final LED waterTankCapacityLED;
+    private final LED foamTankCapacityLED;
+
+    private final CapacityLEDController foamCapacityLEDController;
+    private final CapacityLEDController waterCapacityLEDController;
+
     public ControlPanel(FrontLauncher frontLauncher, RoofExtinguishingArm roofExtinguishingArm, Engine engine, CentralUnit centralUnit)
     {
         rotaryButtonFrontExtinguishingArm = new RotaryButtonFrontExtinguishingArm(roofExtinguishingArm);
@@ -33,6 +41,20 @@ public class ControlPanel {
         roofLightSwitch = new Switch(new RoofLightOnCommand(centralUnit), new RoofLightOffCommand(centralUnit));
         sideLightSwitch = new Switch(new SideLightOnCommand(centralUnit), new SideLightOffCommand(centralUnit));
         warningLightSwitch = new Switch(new WarningLightOnCommand(centralUnit), new WarningLightOffCommand(centralUnit));
+
+        this.waterTankCapacityLED = new LED();
+        this.foamTankCapacityLED = new LED();
+
+        foamCapacityLEDController = new CapacityLEDController(foamTankCapacityLED);
+        waterCapacityLEDController = new CapacityLEDController(waterTankCapacityLED);
+    }
+
+    public CapacityLEDController getFoamCapacityLEDController() {
+        return foamCapacityLEDController;
+    }
+
+    public CapacityLEDController getWaterCapacityLEDController() {
+        return waterCapacityLEDController;
     }
 
     public RotaryButtonFrontExtinguishingArm getRotaryButtonFrontExtinguishingArm() {

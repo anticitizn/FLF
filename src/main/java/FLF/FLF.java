@@ -156,13 +156,10 @@ public class FLF {
         private final ArrayList<FloorSprayNozzle> floorSprayNozzleList;
         private final RoofExtinguishingArm roofExtinguishingArm;
 
-        public Builder( Engine engine, WaterTank waterTank, FoamPowderTank foamPowderTank){
-
+        public Builder(Engine engine, WaterTank waterTank, FoamPowderTank foamPowderTank) {
             this.engine=engine;
             this.waterTank=waterTank;
             this.foamPowderTank=foamPowderTank;
-
-
 
             frontLauncher=new FrontLauncher();
             floorSprayNozzleList = new ArrayList<>();
@@ -209,6 +206,9 @@ public class FLF {
 
 
             ControlPanel controlPanel = new ControlPanel(frontLauncher, roofExtinguishingArm, engine, centralUnit);
+
+            waterTank.addListener(controlPanel.getWaterCapacityLEDController());
+            foamPowderTank.addListener(controlPanel.getFoamCapacityLEDController());
 
             cabin = new Cabin.Builder(
                     new Cabin.DriverBuilder(new Joystick(frontLauncher), new SteeringWheel(centralUnit), new SpeedDisplay(centralUnit), new GasPedal(centralUnit), new BrakePedal(centralUnit),frontLauncher),
