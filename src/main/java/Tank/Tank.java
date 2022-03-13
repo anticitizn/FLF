@@ -57,6 +57,7 @@ public abstract class Tank implements ITank{
                 }
             }
         }
+        callCapacityListeners();
     }
 
     public void drain(int amount) {
@@ -74,6 +75,7 @@ public abstract class Tank implements ITank{
                 }
             }
         }
+        callCapacityListeners();
     }
 
     public int getCapacity(){

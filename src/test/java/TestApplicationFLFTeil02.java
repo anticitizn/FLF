@@ -1,18 +1,28 @@
 import CentralUnit.CentralUnit;
 import Configuration.Configuration;
+import ControlPanel.StateOn;
+import ControlPanel.Switch;
 import Engine.Battery;
 import Engine.Engine;
 import Equipment.FloorSprayNozzle;
 import FLF.FLF;
 import ID.IDCard;
+import Light.BlueLight;
+import Light.HeadLight;
+import Light.LED;
+import Light.LightColor;
 import Person.Driver;
 import Person.Operator;
+import Position.Position;
 import Tank.FoamPowderTank;
 import Tank.WaterTank;
 import Task_01_Component.MixingUnitComponent;
 import Task_03_Composite.Cell;
 import Task_05_Adapter.EChargingAdapter;
 import Task_05_Adapter.IEChargingStation;
+import Task_07_Command.HeadLightOffCommand;
+import Task_07_Command.HeadLightOnCommand;
+import Task_08_Observer.CapacityLEDController;
 import Task_09_Visitor.IVisitable;
 import org.junit.jupiter.api.*;
 
@@ -124,7 +134,10 @@ public class TestApplicationFLFTeil02 {
     @DisplayName("SOA and EventBus")
     public void soa()
     {
-
+        HeadLight headLight = new HeadLight(Position.FRONT, 5);
+        flf.getCentralUnit().addSubscriber(headLight);
+        flf.getCentralUnit().switchOnHeadLights();
+        assertTrue(headLight.checkIsOn());
 
     }
 
@@ -216,7 +229,10 @@ public class TestApplicationFLFTeil02 {
     @DisplayName("State")
     public void state()
     {
-
+        HeadLightOnCommand command = new HeadLightOnCommand(flf.getCentralUnit());
+        Switch testSwitch = new Switch(command, command);
+        testSwitch.on();
+        assertTrue(testSwitch.getState() instanceof StateOn);
     }
 
     @Order(7)
@@ -224,6 +240,30 @@ public class TestApplicationFLFTeil02 {
     @DisplayName("command")
     public void command()
     {
+        HeadLightOnCommand commandOn = new HeadLightOnCommand(flf.getCentralUnit());
+        HeadLightOffCommand commandOff = new HeadLightOffCommand(flf.getCentralUnit());
+        Switch testSwitch = new Switch(commandOn, commandOff);
+        testSwitch.on();
+        boolean allLightsOn = true;
+        for (HeadLight headlight : flf.getHeadLightList()) {
+            if (!headlight.checkIsOn()) {
+                allLightsOn = false;
+                break;
+            }
+        }
+
+        assertTrue(allLightsOn);
+
+        testSwitch.off();
+        boolean allLightsOff = true;
+        for (HeadLight headlight : flf.getHeadLightList()) {
+            if (headlight.checkIsOn()) {
+                allLightsOff = false;
+                break;
+            }
+        }
+
+        assertTrue(allLightsOff);
 
     }
 
@@ -232,7 +272,12 @@ public class TestApplicationFLFTeil02 {
     @DisplayName("Observer")
     public void observer()
     {
-
+        LED testLed = new LED();
+        CapacityLEDController testController = new CapacityLEDController(testLed);
+        WaterTank waterTank = new WaterTank();
+        waterTank.addListener(testController);
+        waterTank.drain(1000000000);
+        assertEquals(LightColor.Red, testLed.getLightColor());
     }
 
     @Order(8)

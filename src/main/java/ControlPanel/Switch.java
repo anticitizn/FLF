@@ -31,4 +31,8 @@ public class Switch {
             off();
         }
     }
+
+    public State getState() {
+        return state;
+    }
 }
