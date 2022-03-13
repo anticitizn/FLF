@@ -2,7 +2,6 @@ package Light;
 
 import Position.Position;
 import Task_02_SOA.*;
-import com.google.common.eventbus.Subscribe;
 
 import java.util.ArrayList;
 

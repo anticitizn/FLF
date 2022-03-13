@@ -5,10 +5,9 @@ import Equipment.FrontLauncher;
 import Equipment.RoofExtinguishingArm;
 import RotaryButton.RotaryButtonFrontExtinguishingArm;
 import RotaryButton.RotaryButtonFrontLauncher;
-import Task_02_SOA.SwitchRoofLightOffEvent;
-import Task_02_SOA.SwitchRoofLightOnEvent;
 import CentralUnit.*;
 
+import Task_07_Command.*;
 
 public class ControlPanel {
     private final CentralUnit centralUnit;
@@ -29,11 +28,11 @@ public class ControlPanel {
         this.centralUnit = centralUnit;
         this.engine= engine;
 
-        blueLightSwitch = new Switch(SwitchType.BlueLight, centralUnit);
-        headLightSwitch = new Switch(SwitchType.HeadLight, centralUnit);
-        roofLightSwitch = new Switch(SwitchType.RoofLight, centralUnit);
-        sideLightSwitch = new Switch(SwitchType.SideLight, centralUnit);
-        warningLightSwitch = new Switch(SwitchType.WarningLight, centralUnit);
+        blueLightSwitch = new Switch(new BlueLightOnCommand(centralUnit), new BlueLightOffCommand(centralUnit));
+        headLightSwitch = new Switch(new HeadLightOnCommand(centralUnit), new HeadLightOffCommand(centralUnit));
+        roofLightSwitch = new Switch(new RoofLightOnCommand(centralUnit), new RoofLightOffCommand(centralUnit));
+        sideLightSwitch = new Switch(new SideLightOnCommand(centralUnit), new SideLightOffCommand(centralUnit));
+        warningLightSwitch = new Switch(new WarningLightOnCommand(centralUnit), new WarningLightOffCommand(centralUnit));
     }
 
     public RotaryButtonFrontExtinguishingArm getRotaryButtonFrontExtinguishingArm() {

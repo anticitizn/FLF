@@ -5,9 +5,7 @@ import Equipment.FloorSprayNozzle;
 import Equipment.FrontLauncher;
 import Equipment.RoofExtinguishingArm;
 import Steering.SteeringAxis;
-import Task_02_SOA.Subscriber;
-import Task_02_SOA.SwitchRoofLightOffEvent;
-import Task_02_SOA.SwitchRoofLightOnEvent;
+import Task_02_SOA.*;
 import Task_09_Visitor.IVisitor;
 
 import com.google.common.eventbus.EventBus;
@@ -151,42 +149,42 @@ public class CentralUnit implements IVisitor {
 
     public void switchOnSideLights()
     {
-        eventBus.post(new SwitchRoofLightOnEvent(eventID++));
+        eventBus.post(new SwitchSideLightOnEvent(eventID++));
     }
 
     public void switchOffSideLights()
     {
-        eventBus.post(new SwitchRoofLightOffEvent(eventID++));
+        eventBus.post(new SwitchSideLightOffEvent(eventID++));
     }
 
     public void switchOnHeadLights()
     {
-        eventBus.post(new SwitchRoofLightOnEvent(eventID++));
+        eventBus.post(new SwitchHeadLightOnEvent(eventID++));
     }
 
     public void switchOffHeadLights()
     {
-        eventBus.post(new SwitchRoofLightOffEvent(eventID++));
+        eventBus.post(new SwitchHeadLightOffEvent(eventID++));
     }
 
     public void switchOnWarningLights()
     {
-        eventBus.post(new SwitchRoofLightOnEvent(eventID++));
+        eventBus.post(new SwitchWarningLightOnEvent(eventID++));
     }
 
     public void switchOffWarningLights()
     {
-        eventBus.post(new SwitchRoofLightOffEvent(eventID++));
+        eventBus.post(new SwitchWarningLightOffEvent(eventID++));
     }
 
     public void switchOnBlueLights()
     {
-        eventBus.post(new SwitchRoofLightOnEvent(eventID++));
+        eventBus.post(new SwitchBlueLightOnEvent(eventID++));
     }
 
     public void switchOffBlueLights()
     {
-        eventBus.post(new SwitchRoofLightOffEvent(eventID++));
+        eventBus.post(new SwitchBlueLightOffEvent(eventID++));
     }
 
 }

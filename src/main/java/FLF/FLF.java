@@ -183,10 +183,32 @@ public class FLF {
                 steeringAxesList.add(new SteeringAxis());
             }
 
-            centralUnit = new CentralUnit(engine, steeringAxesList);
-            ControlPanel controlPanel = new ControlPanel(frontLauncher, roofExtinguishingArm, engine, centralUnit);
-
             buildLights();
+
+            centralUnit = new CentralUnit(engine, steeringAxesList);
+
+            for (RoofLight light : roofLightsList) {
+                centralUnit.addSubscriber(light);
+            }
+
+            for (BlueLight light : blueLightsList) {
+                centralUnit.addSubscriber(light);
+            }
+
+            for (WarningLight light : warningLightList) {
+                centralUnit.addSubscriber(light);
+            }
+
+            for (HeadLight light : headLightList) {
+                centralUnit.addSubscriber(light);
+            }
+
+            for (SideLight light : sideLightList) {
+                centralUnit.addSubscriber(light);
+            }
+
+
+            ControlPanel controlPanel = new ControlPanel(frontLauncher, roofExtinguishingArm, engine, centralUnit);
 
             cabin = new Cabin.Builder(
                     new Cabin.DriverBuilder(new Joystick(frontLauncher), new SteeringWheel(centralUnit), new SpeedDisplay(centralUnit), new GasPedal(centralUnit), new BrakePedal(centralUnit),frontLauncher),
