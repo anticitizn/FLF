@@ -1,7 +1,7 @@
 package Light;
 
 import Position.Position;
-import Task_02_SOA.SwitchHeadLightEvent;
+import Task_02_SOA.*;
 import com.google.common.eventbus.Subscribe;
 
 public class HeadLight extends Light {
@@ -11,8 +11,13 @@ public class HeadLight extends Light {
     }
 
     @Subscribe
-    public void receive(SwitchHeadLightEvent event) {
-        isOn = !isOn;
+    public void receive(SwitchHeadLightOnEvent event) {
+        isOn = true;
+    }
+
+    @Subscribe
+    public void receive(SwitchHeadLightOffEvent event) {
+        isOn = false;
     }
 
     public boolean checkIsOn()

@@ -1,7 +1,7 @@
 package Light;
 
 import Position.Position;
-import Task_02_SOA.SwitchSideLightEvent;
+import Task_02_SOA.*;
 import com.google.common.eventbus.Subscribe;
 
 public class SideLight extends Light {
@@ -10,8 +10,13 @@ public class SideLight extends Light {
     }
 
     @Subscribe
-    public void receive(SwitchSideLightEvent event) {
-        isOn = !isOn;
+    public void receive(SwitchSideLightOnEvent event) {
+        isOn = true;
+    }
+
+    @Subscribe
+    public void receive(SwitchSideLightOffEvent event) {
+        isOn = false;
     }
 
     public boolean checkIsOn()

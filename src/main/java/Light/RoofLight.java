@@ -1,7 +1,7 @@
 package Light;
 
 import Position.Position;
-import Task_02_SOA.SwitchRoofLightEvent;
+import Task_02_SOA.*;
 import com.google.common.eventbus.Subscribe;
 
 public class RoofLight extends Light {
@@ -11,8 +11,13 @@ public class RoofLight extends Light {
     }
 
     @Subscribe
-    public void receive(SwitchRoofLightEvent event) {
-        isOn = !isOn;
+    public void receive(SwitchRoofLightOnEvent event) {
+        isOn = true;
+    }
+
+    @Subscribe
+    public void receive(SwitchRoofLightOffEvent event) {
+        isOn = false;
     }
 
     public boolean checkIsOn()

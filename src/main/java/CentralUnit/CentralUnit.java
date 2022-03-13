@@ -6,6 +6,8 @@ import Equipment.FrontLauncher;
 import Equipment.RoofExtinguishingArm;
 import Steering.SteeringAxis;
 import Task_02_SOA.Subscriber;
+import Task_02_SOA.SwitchRoofLightOffEvent;
+import Task_02_SOA.SwitchRoofLightOnEvent;
 import Task_09_Visitor.IVisitor;
 
 import com.google.common.eventbus.EventBus;
@@ -20,10 +22,23 @@ public class CentralUnit implements IVisitor {
     private byte[] encrypted;
     private byte[] decrypted;
     private boolean isLocked;
+    private final EventBus eventBus;
+    private int eventID;
 
     public CentralUnit(Engine engine, ArrayList<SteeringAxis> steeringAxes) {
         this.engine = engine;
         this.steeringAxes = steeringAxes;
+        this.eventBus = new EventBus();
+    }
+
+    public void addSubscriber(Subscriber subscriber) {
+        eventBus.register(subscriber);
+    }
+
+    public void addSubscriber(ArrayList<Subscriber> subscribers) {
+        for(Subscriber subscriber : subscribers) {
+            eventBus.register(subscriber);
+        }
     }
 
     public void switchOnEngine()
@@ -123,4 +138,55 @@ public class CentralUnit implements IVisitor {
     public void visit(FloorSprayNozzle floorSprayNozzle) {
         floorSprayNozzle.shoot();
     }
+
+    public void switchOnRoofLights()
+    {
+        eventBus.post(new SwitchRoofLightOnEvent(eventID++));
+    }
+
+    public void switchOffRoofLights()
+    {
+        eventBus.post(new SwitchRoofLightOffEvent(eventID++));
+    }
+
+    public void switchOnSideLights()
+    {
+        eventBus.post(new SwitchRoofLightOnEvent(eventID++));
+    }
+
+    public void switchOffSideLights()
+    {
+        eventBus.post(new SwitchRoofLightOffEvent(eventID++));
+    }
+
+    public void switchOnHeadLights()
+    {
+        eventBus.post(new SwitchRoofLightOnEvent(eventID++));
+    }
+
+    public void switchOffHeadLights()
+    {
+        eventBus.post(new SwitchRoofLightOffEvent(eventID++));
+    }
+
+    public void switchOnWarningLights()
+    {
+        eventBus.post(new SwitchRoofLightOnEvent(eventID++));
+    }
+
+    public void switchOffWarningLights()
+    {
+        eventBus.post(new SwitchRoofLightOffEvent(eventID++));
+    }
+
+    public void switchOnBlueLights()
+    {
+        eventBus.post(new SwitchRoofLightOnEvent(eventID++));
+    }
+
+    public void switchOffBlueLights()
+    {
+        eventBus.post(new SwitchRoofLightOffEvent(eventID++));
+    }
+
 }

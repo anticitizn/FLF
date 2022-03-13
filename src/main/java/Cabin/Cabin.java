@@ -44,7 +44,7 @@ public class Cabin {
         brakePedal=builder.driverBuilder.brakePedal;
         frontLauncherJoystick=builder.driverBuilder.frontLauncherJoystick;
         roofExtinguishingArmJoystick=builder.operatorBuilder.roofExtinguishingArmJoystick;
-        controlPanel=builder.operatorBuilder.controlPanel;
+        controlPanel=builder.controlPanel;
     }
 
     public ArrayList<BusDoor> getBusDoorsList() {
@@ -149,10 +149,8 @@ public class Cabin {
         private final ControlPanel controlPanel;
         private final AbstractJoystick roofExtinguishingArmJoystick;
 
-        public OperatorBuilder(AbstractJoystick joystick, FrontLauncher frontLauncher, RoofExtinguishingArm roofExtinguishingArm,
-                               Engine engine, ArrayList<RoofLight> roofLightsList, ArrayList<SideLight> sideLightList, ArrayList<HeadLight> headLightList,
-                               ArrayList<BlueLight> blueLightsList, ArrayList<WarningLight> warningLightList) {
-            controlPanel = new ControlPanel(frontLauncher,roofExtinguishingArm, engine, roofLightsList, sideLightList, headLightList, blueLightsList, warningLightList);
+        public OperatorBuilder(AbstractJoystick joystick, ControlPanel controlPanel) {
+            this.controlPanel = controlPanel;
             roofExtinguishingArmJoystick = joystick;
         }
     }
@@ -162,11 +160,13 @@ public class Cabin {
         private final ArrayList<BusDoor> busDoorsList;
         private final ArrayList<Seats> seatsList;
         private final BatteryDisplay batteryDisplay;
+        private final ControlPanel controlPanel;
         private final DriverBuilder driverBuilder;
         private final OperatorBuilder operatorBuilder;
 
-        public Builder(DriverBuilder driverBuilder, OperatorBuilder operatorBuilder, CentralUnit centralUnit)
+        public Builder(DriverBuilder driverBuilder, OperatorBuilder operatorBuilder, CentralUnit centralUnit, ControlPanel controlPanel)
         {
+            this.controlPanel = controlPanel;
             busDoorsList = new ArrayList<>();
             seatsList = new ArrayList<>();
             batteryDisplay = new BatteryDisplay();

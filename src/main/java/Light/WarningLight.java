@@ -1,7 +1,7 @@
 package Light;
 
 import Position.Position;
-import Task_02_SOA.SwitchWarningLightEvent;
+import Task_02_SOA.*;
 import com.google.common.eventbus.Subscribe;
 
 public class WarningLight extends Light {
@@ -11,8 +11,13 @@ public class WarningLight extends Light {
     }
 
     @Subscribe
-    public void receive(SwitchWarningLightEvent event) {
-        isOn = !isOn;
+    public void receive(SwitchWarningLightOnEvent event) {
+        isOn = true;
+    }
+
+    @Subscribe
+    public void receive(SwitchWarningLightOffEvent event) {
+        isOn = false;
     }
 
     public boolean checkIsOn()

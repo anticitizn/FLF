@@ -1,7 +1,7 @@
 package Light;
 
 import Position.Position;
-import Task_02_SOA.SwitchBlueLightEvent;
+import Task_02_SOA.SwitchBlueLightOnEvent;
 import com.google.common.eventbus.Subscribe;
 
 public class BreakingLight extends Light {
@@ -10,9 +10,14 @@ public class BreakingLight extends Light {
         super(position, ledAmount);
     }
 
-    @Subscribe
-    public void receive(SwitchBlueLightEvent event) {
-        isOn = !isOn;
+    public void switchOn()
+    {
+        isOn=true;
+    }
+
+    public void switchOff()
+    {
+        isOn=false;
     }
 
     public boolean checkIsOn()

@@ -2,6 +2,7 @@ package FLF;
 
 import Cabin.Cabin;
 import CentralUnit.CentralUnit;
+import ControlPanel.ControlPanel;
 import Display.SpeedDisplay;
 import Engine.Engine;
 import Equipment.FloorSprayNozzle;
@@ -183,14 +184,15 @@ public class FLF {
             }
 
             centralUnit = new CentralUnit(engine, steeringAxesList);
+            ControlPanel controlPanel = new ControlPanel(frontLauncher, roofExtinguishingArm, engine, centralUnit);
 
             buildLights();
 
             cabin = new Cabin.Builder(
                     new Cabin.DriverBuilder(new Joystick(frontLauncher), new SteeringWheel(centralUnit), new SpeedDisplay(centralUnit), new GasPedal(centralUnit), new BrakePedal(centralUnit),frontLauncher),
-                    new Cabin.OperatorBuilder(new Joystick(roofExtinguishingArm), frontLauncher,roofExtinguishingArm, engine, roofLightsList, sideLightList,  headLightList,
-                            blueLightsList,  warningLightList),
-                    centralUnit).build();
+                    new Cabin.OperatorBuilder(new Joystick(roofExtinguishingArm), controlPanel),
+                    centralUnit,
+                    controlPanel).build();
         }
 
         public void buildLights()
